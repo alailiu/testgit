@@ -1,5 +1,5 @@
 Documentation                       RLI35194 Support TWAMP Server on Siege/Forge (Moto)
-...             Author             : Jianmingi Zhang
+...             Author             : Jianmingii Zhang
 ...             Date               : 06/15/2017
 ...             JTMS TEST PLAN     : http://systest.juniper.net/feature_testplan/44251/1.1
 ...             RLI                : 35195
