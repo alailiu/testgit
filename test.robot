@@ -36,7 +36,7 @@ TWAMP_Server_Flow_Mode_TC_1
 
     [Tags]  TWAMP_Server  Flow_Mode
 
-    should not contain     111     100% packet loss
+    should not contain     100% packet loss     100% packet loss
 
     #Check Twamp Server basic function with default values
     # Config the twamp client with basic config  connection_name=${tv['uv-connection-name']}   session_name=${tv['uv-session-name']}  target_addr=${tv['uv-r1_r0-ip']}  probe_count=${tv['uv-probes-count']}
