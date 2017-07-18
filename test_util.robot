@@ -1,7 +1,7 @@
 
-*** Settings ***  *
+*** Settings ***
 Library    jnpr/toby/engines/config/config.py
-Library    XML hehe23
+Library    XML
 Resource   jnpr/toby/Master.robot
 
 

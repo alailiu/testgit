@@ -1,0 +1,54 @@
+
+fv-core-check    "enable";
+uv-topology-info  "                                                                   
+    +---------+             +-----------+          
+    |         |             |           |    
+    |   R0    |-------------|    R1     |
+    |  (DUT)  |             |           |
+    +---------+             +-----------+         
+  ";
+
+uv-r0_r1-ip    "100.10.1.1";
+uv-r1_r0-ip    "100.10.1.2";
+uv-r0_r1-nm    "100.10.1.0/24";
+uv-r0_r1-ip2    "200.20.2.1";
+uv-r1_r0-ip2    "200.20.2.2";
+uv-r0_r1-nm2    "100.10.1.0/24";
+uv-mask        "24";
+uv-connection-name   "c1";
+uv-session-name      "t1";
+uv-probes-count       "2000";
+uv-port-range     "1to65535";
+uv-port           "234";
+uv-connection-cnt   "40";
+uv-session-cnt      "15";
+uv-session-percon    "5";
+uv-inact-timeout     "2";
+uv-routing-instance   "twamp";
+uv-rtt-range          "-50000to50000";
+
+
+r0 {
+    system {
+        make        "juniper";
+        model       (or  "srx650" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+    }
+    interfaces {
+        R0R1 {
+            link    "connect1";
+        }
+    }
+}
+r1 {
+    system {
+       
+        make        "juniper";
+        name "petunia";
+        model       (or "srx220h" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+    }
+    interfaces {
+        R1R0 {
+            link    "connect1";
+        }
+   }
+}
