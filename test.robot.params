@@ -44,7 +44,7 @@ r1 {
     system {
        
         make        "juniper";
-        name "xueshan";
+        name "pulao";
         #model       (or "srx220h" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
