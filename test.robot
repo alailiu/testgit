@@ -11,7 +11,7 @@ Documentation                       RLI35194 Support TWAMP Server on Siege/Forge
 
 *** Settings ***
 Resource   jnpr/toby/Master.robot
-Resource   151_RLI35194_SRX_Twamp_Server_util.robot
+Resource   test_util.robot
 Suite Setup      Run Keywords
 ...     Initialize the test environment of Topology with two nodes
 ...     Check all the devices on Flow Mode
