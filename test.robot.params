@@ -10,11 +10,14 @@ uv-topology-info  "
 
 uv-r0_r1-ip    "100.10.1.1";
 uv-r1_r0-ip    "100.10.1.2";
+uv-r0_r1-ip6    "2000::1";
+uv-r1_r0-ip6    "2000::2";
 uv-r0_r1-nm    "100.10.1.0/24";
 uv-r0_r1-ip2    "200.20.2.1";
 uv-r1_r0-ip2    "200.20.2.2";
 uv-r0_r1-nm2    "100.10.1.0/24";
 uv-mask        "24";
+uv-mask6        "64";
 uv-connection-name   "c1";
 uv-session-name      "t1";
 uv-probes-count       "2000";
