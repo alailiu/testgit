@@ -34,7 +34,7 @@ uv-rtt-range          "-50000to50000";
 r0 {
     system {
         make        "juniper";
-        name "e09-22";
+        name "nanfang";
         #model       (or  "srx650" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
