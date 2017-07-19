@@ -35,7 +35,9 @@ TWAMP_Server_Flow_Mode_TC_1
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
     [Tags]  TWAMP_Server  Flow_Mode
-    ${response}    execute cli command on device    device=${client}   command=show interface terse
+    ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r0_r1-ip']}
+
+
     sleep   5000s
     should not contain     100% packet loss     100% packet loss
 
