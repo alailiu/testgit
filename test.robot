@@ -35,7 +35,7 @@ TWAMP_Server_Flow_Mode_TC_1
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
     [Tags]  TWAMP_Server  Flow_Mode
-    ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=/yes/
+    ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=yes
 
     Log to Console    "\n\n\n${response}\n\n\n"
     sleep   5000s
