@@ -291,7 +291,7 @@ Init the Configurations on two nodes in Flow Mode
 
     @{cmd_list_r1}     create list
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
-    ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip6']}/${tv['uv-mask6']}
+    ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet6 address ${tv['uv-r1_r0-ip6']}/${tv['uv-mask6']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
