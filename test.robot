@@ -36,6 +36,7 @@ TWAMP_Server_Flow_Mode_TC_1
 
     [Tags]  TWAMP_Server  Flow_Mode
 
+    sleep   5000s
     should not contain     100% packet loss     100% packet loss
 
     #Check Twamp Server basic function with default values
