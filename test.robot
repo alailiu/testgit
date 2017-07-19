@@ -37,7 +37,7 @@ TWAMP_Server_Flow_Mode_TC_1
     [Tags]  TWAMP_Server  Flow_Mode
     ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r0_r1-ip']}
 
-
+    Log to Console ${response}
     sleep   5000s
     should not contain     100% packet loss     100% packet loss
 
