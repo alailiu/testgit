@@ -39,7 +39,7 @@ TWAMP_Server_Flow_Mode_TC_1
     ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=(no|word)
     Log to Console    "hbhbhb\n\n\n${response}\n\n\nhbhbhb"
     sleep   5s
-    ${response}    execute cli command on device    device=${client}   command=yes   pattern=(word)
+    ${response}    execute cli command on device    device=${client}   command=Embe1mpls   pattern=(word)
 
     Log to Console    "hahaha\n\n\n${response}\n\n\nhahaha"
     sleep   5000s
