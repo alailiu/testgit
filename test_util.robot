@@ -555,6 +555,23 @@ Config the twamp server with basic config
      execute config command on device      device=${server}   command_list=@{cmd_list}   timeout=${150}
      sleep  20s
 
+Prepare test file on local and remote
+    [Documentation]  Config the twamp server with default config
+
+     Save Device Configuration      device=${client}   file=/var/tmp/testfilelocal
+     sleep  5s
+     Save Device Configuration      device=${server}   file=/var/tmp/testfileremote
+     sleep  5s
+
+
+
+Scp file from local to remote
+    [Documentation]  Config the twamp server with default config
+    [Arguments]  ${server_ip}
+
+
+     execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
+     sleep  20s
 
 Delete the Twamp Configuration
     [Documentation]  Delete the Twamp Configuration

@@ -16,9 +16,9 @@ Suite Setup      Run Keywords
 ...     Initialize the test environment of Topology with two nodes
 ...     Check all the devices on Flow Mode
 ...     Init the Configurations on two nodes in Flow Mode
+...     Prepare test file on local and remote
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
 Test Teardown   Run Keywords
-...    Restore the routing instance to default
 ...    Restore the interface with no policy
 
 
