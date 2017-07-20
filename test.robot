@@ -18,8 +18,6 @@ Suite Setup      Run Keywords
 ...     Init the Configurations on two nodes in Flow Mode
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
 Test Teardown   Run Keywords
-...    Stop twamp client connction
-...    Delete the Twamp Configuration
 ...    Restore the routing instance to default
 ...    Restore the interface with no policy
 
@@ -35,6 +33,8 @@ TWAMP_Server_Flow_Mode_TC_1
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
     [Tags]  TWAMP_Server  Flow_Mode
+
+    ${response}    execute shell command on device    device=${client}   command=rm -rf /cf/root/.ssh/known_hosts
     #${response}    execute cli command on device    device=${client}   command="ssh root@${tv['uv-r1_r0-ip']}"   pattern=(no)
     ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=(no)
     Log to Console    "hbhbhb\n\n\n${response}\n\n\nhbhbhb"
