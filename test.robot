@@ -36,7 +36,7 @@ TWAMP_Server_Flow_Mode_TC_1
 
     ${response}    execute shell command on device    device=${client}   command=rm -rf /cf/root/.ssh/known_hosts
     #${response}    execute cli command on device    device=${client}   command="ssh root@${tv['uv-r1_r0-ip']}"   pattern=(no)
-    ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=(no,word)
+    ${response}    execute cli command on device    device=${client}   command=ssh root@${tv['uv-r1_r0-ip']}   pattern=(no|word)
     Log to Console    "hbhbhb\n\n\n${response}\n\n\nhbhbhb"
     sleep   5s
     ${response}    execute cli command on device    device=${client}   command=yes   pattern=(word)
