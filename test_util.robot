@@ -570,8 +570,31 @@ Scp file from local to remote
     [Arguments]  ${server_ip}
 
 
-     execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
-     sleep  20s
+    ${response}    execute shell command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+    run keyword if   '${status}' == 'True'    execute shell command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes
+    sleep  20s
+
+Scp file from remote to local
+    [Documentation]  Config the twamp server with default config
+    [Arguments]  ${server_ip}
+
+
+    execute shell command on device      device=${client}   command=scp root@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+    run keyword if   '${status}' == 'True'    execute shell command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes
+    sleep  20s
+
+
+delete test files
+    [Documentation]  Config the twamp server with default config
+
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfilelocal
+     sleep  5s
 
 Delete the Twamp Configuration
     [Documentation]  Delete the Twamp Configuration
