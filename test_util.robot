@@ -588,7 +588,7 @@ Scp file from remote to local
     sleep  20s
 
 
-delete test files
+Delete test files
     [Documentation]  Config the twamp server with default config
 
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote

@@ -19,7 +19,7 @@ Suite Setup      Run Keywords
 ...     Prepare test file on local and remote
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
 Test Teardown   Run Keywords
-...    delete test files
+...    Delete test files
 ...    Restore the interface with no policy
 
 
@@ -28,7 +28,7 @@ Test Teardown   Run Keywords
 
 
 *** Test Cases ***
-TWAMP_Server_Flow_Mode_TC_1
+SCP_TC_1
     [Documentation]
     ...     Tc5.1-1  Verify TWAMP Server basic function with default values
     ...     Tc5.1-9  Verify the function of port for tcp connection
