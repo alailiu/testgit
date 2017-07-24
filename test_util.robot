@@ -567,7 +567,7 @@ Prepare test file on local and remote
      sleep  5s
 
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfilelocal
-     ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+/
+     ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
      Log to Console    "hbhbhb\n\n\n${filelocalsize}\n\n\nhbhbhb"
 
      set suite variable      ${filelocalsize}      ${localsize}
