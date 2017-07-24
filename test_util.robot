@@ -566,9 +566,14 @@ Prepare test file on local and remote
      Save Device Configuration      device=${server}   file=/var/tmp/testfileremote
      sleep  5s
 
-     ${response}    execute shell command on device      device=${client}   command=ls -al testfilelocal
-     ${filelocalsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+/
+     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfilelocal
+     ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+/
      Log to Console    "hbhbhb\n\n\n${filelocalsize}\n\n\nhbhbhb"
+
+     set suite variable      ${filelocalsize}      ${localsize}
+
+
+
 
 Scp file from local to remote
     [Documentation]  Config the twamp server with default config
