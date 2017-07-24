@@ -557,8 +557,11 @@ Config the twamp server with basic config
 
 Prepare test file on local and remote
     [Documentation]  Config the twamp server with default config
-
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
+     sleep  5s
      Save Device Configuration      device=${client}   file=/var/tmp/testfilelocal
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfileremote
      sleep  5s
      Save Device Configuration      device=${server}   file=/var/tmp/testfileremote
      sleep  5s
@@ -570,12 +573,12 @@ Scp file from local to remote
     [Arguments]  ${server_ip}
 
 
-    ${response}    execute shell command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
+    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
-    run keyword if   '${status}' == 'True'    execute shell command on device      device=${client}   command=Embe1mpls
-    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes   pattern=(word)
+    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes   pattern=(word)
 
-    execute shell command on device      device=${client}   command=Embe1mpls
+    execute cli command on device      device=${client}   command=Embe1mpls
     sleep  20s
 
 Scp file from remote to local
@@ -583,10 +586,10 @@ Scp file from remote to local
     [Arguments]  ${server_ip}
 
 
-    execute shell command on device      device=${client}   command=scp root@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    execute cli command on device      device=${client}   command=scp root@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
-    run keyword if   '${status}' == 'True'    execute shell command on device      device=${client}   command=Embe1mpls
-    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes
+    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes
     sleep  20s
 
 
