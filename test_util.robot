@@ -604,6 +604,16 @@ Scp file from remote to local
     run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes
     sleep  20s
 
+Check copyed file size
+    [Documentation]  Config the twamp server with default config
+    [Arguments]  ${device}  ${filename}  ${size}
+
+
+    execute cli command on device      device=${client}   command=scp root@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes
+    sleep  20s
 
 Delete test files
     [Documentation]  Config the twamp server with default config
