@@ -568,10 +568,15 @@ Prepare test file on local and remote
 
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfilelocal
      ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
-     Log to Console    "hbhbhb\n\n\n${filelocalsize}\n\n\nhbhbhb"
+     Log to Console    "hbhbhb\n\n\n${localsize}\n\n\nhbhbhb"
 
      set suite variable      ${filelocalsize}      ${localsize}
 
+     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfileremote
+     ${remotesize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
+     Log to Console    "hbhbhb\n\n\n${remotesize}\n\n\nhbhbhb"
+
+     set suite variable      ${fileremotesize}      ${remotesize}
 
 
 
