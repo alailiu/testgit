@@ -573,7 +573,9 @@ Scp file from local to remote
     ${response}    execute shell command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
     run keyword if   '${status}' == 'True'    execute shell command on device      device=${client}   command=Embe1mpls
-    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes
+    run keyword if   '${status}' == 'False'    execute shell command on device      device=${client}   command=yes   pattern=(word)
+
+    execute shell command on device      device=${client}   command=Embe1mpls
     sleep  20s
 
 Scp file from remote to local
