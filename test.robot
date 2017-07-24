@@ -19,6 +19,7 @@ Suite Setup      Run Keywords
 ...     Prepare test file on local and remote
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
 Test Teardown   Run Keywords
+...    delete test files
 ...    Restore the interface with no policy
 
 
