@@ -574,13 +574,13 @@ Prepare test file on local and remote
 
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfilelocal
      ${ls}   ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
-     Log to Console    "hbhbhb\n\n\n${localsize}\n\n\nhbhbhb"
+     #Log to Console    "hbhbhb\n\n\n${localsize}\n\n\nhbhbhb"
 
      set suite variable      ${filelocalsize}      ${localsize}
 
      ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfileremote
      ${ls}   ${remotesize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
-     Log to Console    "hbhbhb\n\n\n${remotesize}\n\n\nhbhbhb"
+     #Log to Console    "hbhbhb\n\n\n${remotesize}\n\n\nhbhbhb"
 
      set suite variable      ${fileremotesize}      ${remotesize}
 
@@ -606,7 +606,36 @@ Scp file from remote to local
     [Arguments]  ${server_ip}
 
 
-    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp file from local to remote with source address
+    [Documentation]  Scp file from local to remote
+    [Arguments]  ${server_ip}  ${source_addr}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal regress@${server_ip}:/var/tmp/. source-address ${source_addr}   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+
+    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp file from remote to local with source address
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}  ${source_addr}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/. source-address ${source_addr}    pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
 
     run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI

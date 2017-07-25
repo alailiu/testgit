@@ -35,7 +35,7 @@ SCP_TC_1
     ...     Tc5.1-1  in default routing instance，scp file from local to remote
     ...     Tc5.1-2  in default routing instance，scp file from remote to local,
 
-    [Tags]  TWAMP_Server  Flow_Mode
+    [Tags]  scp
 
 
     Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
@@ -43,6 +43,22 @@ SCP_TC_1
 
     sleep   5s
     Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+
+SCP_TC_2
+    [Documentation]
+    ...     Tc5.1-3  in default routing instance，scp file from local to remote with source-address
+    ...     Tc5.1-4  in default routing instance，scp file from remote to local with source-address
+
+    [Tags]  scp with source address
+
+
+    Scp file from local to remote with source address  server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local with source address  server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
