@@ -72,19 +72,19 @@ SCP_TC_3
     Scp file from local to remote   server_ip=[${tv['uv-r1_r0-ip6']}]
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
-    sleep   500000s
+    sleep   5s
     Scp file from remote to local   server_ip=[${tv['uv-r1_r0-ip6']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
 SCP_TC_4
     [Documentation]
-    ...     Tc5.1-3  in default routing instance，scp file from local to remote with source-address
-    ...     Tc5.1-4  in default routing instance，scp file from remote to local with source-address
+    ...     Tc5.1-9  in default routing instance，scp file from local to remote with source-address for ipv6
+    ...     Tc5.1-9  in default routing instance，scp file from remote to local with source-address for ipv6
 
     [Tags]  scp with source address
 
-
+    sleep   50000000s
     Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
