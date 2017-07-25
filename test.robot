@@ -39,7 +39,7 @@ SCP_TC_1
     Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
-    sleep   50000s
+    sleep   5s
 
 
     #Check Twamp Server basic function with default values
