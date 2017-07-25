@@ -314,7 +314,10 @@ Init the Configurations on two nodes in Flow Mode
     should not contain     ${response1}     100% packet loss
     ${response2}   execute cli command on device    device=${server}   command=ping ${client_ip} count 10
     should not contain     ${response2}     100% packet loss
-
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
+    should not contain     ${response2}     100% packet loss
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} count 10
+    should not contain     ${response2}     100% packet loss
 
 Init the Configurations on three nodes in Flow Mode
     [Documentation]  Init the Configurations on three nodes in Flow Mode

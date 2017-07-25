@@ -72,7 +72,7 @@ SCP_TC_3
     Scp file from local to remote   server_ip=[${tv['uv-r1_r0-ip6']}]
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
-    sleep   5s
+    sleep   500000s
     Scp file from remote to local   server_ip=[${tv['uv-r1_r0-ip6']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
