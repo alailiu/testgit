@@ -84,7 +84,7 @@ SCP_TC_4
 
     [Tags]  scp with source address
 
-    sleep   50000000s
+    #sleep   50000000s
     Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
