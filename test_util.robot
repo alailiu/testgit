@@ -288,7 +288,7 @@ Init the Configurations on two nodes in Flow Mode
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r0__r0r1__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
-    ...                set routing-options static route ${uv-r1_r0-nm2} next-hop ${uv-r1_r0-ip}
+    ...                set routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
     ...                commit
     execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
 
@@ -301,7 +301,7 @@ Init the Configurations on two nodes in Flow Mode
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r1__r1r0__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
-    ...                set routing-options static route ${uv-r0_r1-nm2} next-hop ${uv-r0_r1-ip}
+    ...                set routing-options static route ${tv['uv-r0_r1-nm2']} next-hop ${tv['uv-r0_r1-ip']}
     ...                commit
     execute config command on device      device=${r1}   command_list=@{cmd_list_r1}
 
