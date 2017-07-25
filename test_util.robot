@@ -614,6 +614,7 @@ Check copied file size
     Log to Console    "hbhbhb\n\n\n${filesize}\n\n\nhbhbhb"
 
     Should Be Equal    ${size}    ${filesize}
+    Log to Console    "hbhbhb\n\n\nEqual\n\n\nhbhbhb"
     sleep  20s
 
 Delete test files
