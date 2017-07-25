@@ -77,6 +77,22 @@ SCP_TC_3
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
+SCP_TC_4
+    [Documentation]
+    ...     Tc5.1-3  in default routing instance，scp file from local to remote with source-address
+    ...     Tc5.1-4  in default routing instance，scp file from remote to local with source-address
+
+    [Tags]  scp with source address
+
+
+    Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]
     ...     Tc5.1-4  Verify the functioning of maximum-sessions
