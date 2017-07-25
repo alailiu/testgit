@@ -602,6 +602,8 @@ Scp file from remote to local
     ${status}   run keyword and return status   should contain   ${response}     Pass
     run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
     run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes
+
+    execute cli command on device      device=${client}   command=Embe1mpls
     sleep  20s
 
 Check copied file size

@@ -30,8 +30,8 @@ Test Teardown   Run Keywords
 *** Test Cases ***
 SCP_TC_1
     [Documentation]
-    ...     Tc5.1-1  Verify TWAMP Server basic function with default values
-    ...     Tc5.1-9  Verify the function of port for tcp connection
+    ...     Tc5.1-1  in default routing instance，scp file from local to remote
+    ...     Tc5.1-2  in default routing instance，scp file from remote to local,
 
     [Tags]  TWAMP_Server  Flow_Mode
 
@@ -40,7 +40,9 @@ SCP_TC_1
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-
+    Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
 
     #Check Twamp Server basic function with default values
     # Config the twamp client with basic config  connection_name=${tv['uv-connection-name']}   session_name=${tv['uv-session-name']}  target_addr=${tv['uv-r1_r0-ip']}  probe_count=${tv['uv-probes-count']}
