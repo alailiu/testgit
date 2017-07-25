@@ -20,7 +20,6 @@ Suite Setup      Run Keywords
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
 Test Teardown   Run Keywords
 ...    Delete copied files
-...    Restore the interface with no policy
 Suite Teardown   Run Keywords
 ...    Delete test files
 
@@ -33,7 +32,7 @@ Suite Teardown   Run Keywords
 SCP_TC_1
     [Documentation]
     ...     Tc5.1-1  in default routing instance，scp file from local to remote
-    ...     Tc5.1-2  in default routing instance，scp file from remote to local,
+    ...     Tc5.1-2  in default routing instance，scp file from remote to local
 
     [Tags]  scp
 
@@ -62,7 +61,21 @@ SCP_TC_2
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
+SCP_TC_3
+    [Documentation]
+    ...     Tc5.1-9  in default routing instance，scp file from local to remote for ipv6
+    ...     Tc5.1-9  in default routing instance，scp file from remote to local for ipv6
 
+    [Tags]  scp
+
+
+    Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip6']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip6']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
 
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]
