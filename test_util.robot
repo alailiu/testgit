@@ -581,42 +581,45 @@ Prepare test file on local and remote
 
 
 Scp file from local to remote
-    [Documentation]  Config the twamp server with default config
+    [Documentation]  Scp file from local to remote
     [Arguments]  ${server_ip}
 
 
-    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal root@${server_ip}:/var/tmp/.   pattern=(no|word)
+    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal regress@${server_ip}:/var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
-    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
-    run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes   pattern=(word)
 
-    execute cli command on device      device=${client}   command=Embe1mpls
+
+    run keyword if   '${status}' == 'False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)
+                                                       AND     execute cli command on device      device=${client}   command=MaRtInI
+
+    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Scp file from remote to local
-    [Documentation]  Config the twamp server with default config
+    [Documentation]  Scp file from remote to local
     [Arguments]  ${server_ip}
 
 
-    execute cli command on device      device=${client}   command=scp root@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
+    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
-    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=Embe1mpls
-    run keyword if   '${status}' == 'False'    execute cli command on device      device=${client}   command=yes   pattern=(word)
 
-    execute cli command on device      device=${client}   command=Embe1mpls
+    run keyword if   '${status}' == 'False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)
+                                                       AND      execute cli command on device      device=${client}   command=MaRtInI
+
+    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Check copied file size
-    [Documentation]  Config the twamp server with default config
+    [Documentation]  check scp file correct
     [Arguments]  ${device}  ${filename}  ${size}
 
 
     ${response}    execute shell command on device      device=${device}   command=ls -al /var/tmp/${filename}
     ${ls}   ${filesize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
-    Log to Console    "hbhbhb\n\n\n${filesize}\n\n\nhbhbhb"
+    #Log to Console    "hbhbhb\n\n\n${filesize}\n\n\nhbhbhb"
 
     Should Be Equal    ${size}    ${filesize}
-    Log to Console    "hbhbhb\n\n\nEqual\n\n\nhbhbhb"
+    #Log to Console    "hbhbhb\n\n\nEqual\n\n\nhbhbhb"
     sleep  20s
 
 Delete test files
@@ -625,6 +628,10 @@ Delete test files
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote
      sleep  5s
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfilelocal
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfileremote
+     sleep  5s
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
      sleep  5s
 
 Delete the Twamp Configuration
