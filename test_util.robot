@@ -589,10 +589,10 @@ Scp file from local to remote
     ${status}   run keyword and return status   should contain   ${response}     Pass
 
 
-    run keyword if   '${status}' == 'False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
 
 
-    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Scp file from remote to local
@@ -603,10 +603,10 @@ Scp file from remote to local
     execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/.   pattern=(no|word)
     ${status}   run keyword and return status   should contain   ${response}     Pass
 
-    run keyword if   '${status}' == 'False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
 
 
-    run keyword if   '${status}' == 'True'    execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Check copied file size
