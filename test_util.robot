@@ -817,9 +817,9 @@ Config VR routing instance
     sleep   20s
     ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} routing-instance N1 count 10
     should not contain     ${response1}     100% packet loss
-    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} routing-instance N1 count 10
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} routing-instance N1 count 30
     should not contain     ${response2}     100% packet loss
-    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 10
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 30
     should not contain     ${response2}     100% packet loss
 
 Delete VR routing instance
