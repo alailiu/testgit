@@ -594,6 +594,15 @@ Prepare test file on local and remote
 
      set suite variable      ${fileremotesize}      ${remotesize}
 
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder
+     execute shell command on device      device=${client}   command=mkdir /var/tmp/folder
+     execute shell command on device      device=${client}   command=cp /var/tmp/testfilelocal /var/tmp/folder/testfilelocal
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
+     execute shell command on device      device=${server}   command=mkdir /var/tmp/folder
+    execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/folder/testfileremote
+
+     sleep  5s
 
 
 Scp file from local to remote
@@ -712,6 +721,35 @@ Scp file from remote to local with source address in routing instance
     run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
+Scp folder from local to remote
+    [Documentation]  Scp file from local to remote
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp recursive /var/tmp/folder/ regress@${server_ip}:/var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+
+    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp folder from remote to local
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp recursive regress@${server_ip}:/var/tmp/folder/ /var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
 Check copied file size
     [Documentation]  check scp file correct
     [Arguments]  ${device}  ${filename}  ${size}
@@ -755,9 +793,9 @@ Scp interactive test
     ${response}    execute cli command on device      device=${client}   command=scp regress@${tv['uv-r1_r0-ip']}:/var/tmp/testfileremote /var/tmp/.    pattern=(no)
     ${response}    execute cli command on device      device=${client}   command=xx    pattern=(Please type)
     ${response}    execute cli command on device      device=${client}   command=yes    pattern=(word)
-    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)
-    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)
-    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(Too many password failures)
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)   timeout=${150}
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)   timeout=${150}
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(Too many password failures)   timeout=${150}
     #sleep  20s
 
 

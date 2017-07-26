@@ -148,6 +148,20 @@ SCP_TC_6
     Scp interactive test
 
 
+SCP_TC_7
+    [Documentation]
+    ...     Tc5.1-11  scp with recursive option
+    [Tags]  scp with recursive option
+
+    Scp folder from local to remote   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${server}  filename=/var/tmp/folder/testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp folder from remote to local   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${client}  filename=/var/tmp/folder/testfileremote  size=${fileremotesize}
+    sleep   5s
+
+
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]
     ...     Tc5.1-4  Verify the functioning of maximum-sessions
