@@ -729,9 +729,14 @@ Delete copied files
     [Documentation]  delete copied files
 
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote
-     sleep  5s
+     #sleep  5s
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfilelocal
      sleep  5s
+
+     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
+     should not contain     ${response1}     testfileremote
+     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfileremote
+     should not contain     ${response1}     testfilelocal
 
 Delete test files
     [Documentation]  delete copied test files
