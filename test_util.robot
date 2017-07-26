@@ -665,7 +665,7 @@ Check copied file size
 
     Should Be Equal    ${size}    ${filesize}
     #Log to Console    "hbhbhb\n\n\nEqual\n\n\nhbhbhb"
-    sleep  20s
+    sleep  2s
 
 Delete copied files
     [Documentation]  delete copied files
@@ -683,6 +683,27 @@ Delete test files
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
      sleep  5s
 
+
+Config VR route instance
+    [Documentation]  Config VR route instance
+
+    @{cmd_list_r0}     create list
+    ...                set routing-instances N1 instance-type virtual-router
+    ...                set routing-instances N1 interface ${tv['r0__r0r1__pic']}.0
+    ...                set routing-instances N1 interface lo0.0
+    ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
+    ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm62']} next-hop ${tv['uv-r1_r0-ip6']}
+    ...                commit
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
+
+
+    sleep   20s
+    ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} routing-instance N1 count 10
+    should not contain     ${response1}     100% packet loss
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} routing-instance N1 count 10
+    should not contain     ${response2}     100% packet loss
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 10
+    should not contain     ${response2}     100% packet loss
 
 Delete the Twamp Configuration
     [Documentation]  Delete the Twamp Configuration
