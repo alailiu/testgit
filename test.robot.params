@@ -42,8 +42,8 @@ uv-rtt-range          "-50000to50000";
 r0 {
     system {
         make        "juniper";
-        #name "e10-36";
-        name "langya";
+        name "e10-36";
+        #name "langya";
         #model       (or  "srx650" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
@@ -56,8 +56,8 @@ r1 {
     system {
        
         make        "juniper";
-        #name "e10-37";
-        name "pulao";
+        name "e10-37";
+        #name "pulao";
         #model       (or "srx220h" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
