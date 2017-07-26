@@ -726,14 +726,14 @@ Scp folder from local to remote
     [Arguments]  ${server_ip}
 
 
-    ${response}    execute cli command on device      device=${client}   command=scp recursive /var/tmp/folder/ regress@${server_ip}:/var/tmp/.   pattern=(no|word)
-    ${status}   run keyword and return status   should contain   ${response}     Pass
+    ${response}    execute cli command on device      device=${client}   command=scp recursive /var/tmp/folder/ regress@${server_ip}:/var/tmp/.   pattern=(continue connecting|word)
+    ${status}   run keyword and return status   should contain   ${response}     fingerprint
 
 
-    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='True'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
 
 
-    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='False'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Scp folder from remote to local
@@ -741,13 +741,13 @@ Scp folder from remote to local
     [Arguments]  ${server_ip}
 
 
-    ${response}    execute cli command on device      device=${client}   command=scp recursive regress@${server_ip}:/var/tmp/folder/ /var/tmp/.   pattern=(no|word)
-    ${status}   run keyword and return status   should contain   ${response}     Pass
+    ${response}    execute cli command on device      device=${client}   command=scp recursive regress@${server_ip}:/var/tmp/folder/ /var/tmp/.   pattern=(continue connecting|word)
+    ${status}   run keyword and return status   should contain   ${response}     fingerprint
 
-    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='True'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
 
 
-    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    run keyword if   '${status}'=='False'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
 Check copied file size
