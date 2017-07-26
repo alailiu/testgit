@@ -734,9 +734,9 @@ Delete copied files
      sleep  5s
 
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
-     should not contain     ${response}     testfileremote
+     should contain     ${response}     No such
      ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfilelocal
-     should not contain     ${response}     testfilelocal
+     should contain     ${response}     No such
 
 Delete test files
     [Documentation]  delete copied test files
