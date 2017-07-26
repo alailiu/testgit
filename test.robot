@@ -154,11 +154,11 @@ SCP_TC_7
     [Tags]  scp with recursive option
 
     Scp folder from local to remote   server_ip=${tv['uv-r1_r0-ip']}
-    Check copied file size   device=${server}  filename=/var/tmp/folder/testfilelocal  size=${filelocalsize}
+    Check copied file size   device=${server}  filename=folder/testfilelocal  size=${filelocalsize}
 
     sleep   5s
     Scp folder from remote to local   server_ip=${tv['uv-r1_r0-ip']}
-    Check copied file size   device=${client}  filename=/var/tmp/folder/testfileremote  size=${fileremotesize}
+    Check copied file size   device=${client}  filename=folder/testfileremote  size=${fileremotesize}
     sleep   5s
 
 
