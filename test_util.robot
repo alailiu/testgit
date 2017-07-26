@@ -746,6 +746,20 @@ Delete test files
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
      sleep  5s
 
+Scp interactive test
+    [Documentation]  Scp interactive test
+
+    execute shell command on device      device=${client}   command=rm -rf ~regress/.ssh/known_hosts
+    sleep  10s
+
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/.    pattern=(no)
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(Please type)
+    ${response}    execute cli command on device      device=${client}   command=yes    pattern=(word)
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(word)
+    ${response}    execute cli command on device      device=${client}   command=xx    pattern=(Too many password failures)
+    #sleep  20s
+
 
 Config VR routing instance
     [Documentation]  Config VR routing instance

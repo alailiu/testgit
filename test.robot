@@ -139,6 +139,15 @@ SCP_TC_5
 
     Delete VR routing instance
 
+
+
+SCP_TC_6
+    [Documentation]
+    ...     Tc5.1-10  scp authenticity test
+    [Tags]  scp command interactive test
+    Scp interactive test
+
+
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]
     ...     Tc5.1-4  Verify the functioning of maximum-sessions
