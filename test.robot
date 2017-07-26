@@ -102,12 +102,12 @@ SCP_TC_5
 
     Config VR route instance
 
-    sleep   50000000s
-    Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+
+    Scp file from local to remote in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from remote to local in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 

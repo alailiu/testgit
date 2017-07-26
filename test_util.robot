@@ -292,7 +292,7 @@ Init the Configurations on two nodes in Flow Mode
     ...                set routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
     ...                set routing-options rib inet6.0 static route ${tv['uv-r1_r0-nm62']} next-hop ${tv['uv-r1_r0-ip6']}
     ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
 
     @{cmd_list_r1}     create list
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
@@ -307,7 +307,7 @@ Init the Configurations on two nodes in Flow Mode
     ...                set routing-options static route ${tv['uv-r0_r1-nm2']} next-hop ${tv['uv-r0_r1-ip']}
     ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm62']} next-hop ${tv['uv-r0_r1-ip6']}
     ...                commit
-    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}
+    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
 
     sleep   20s
     ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
@@ -654,6 +654,35 @@ Scp file from remote to local with source address
     run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
+Scp file from local to remote in routing instance
+    [Documentation]  Scp file from local to remote
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal regress@${server_ip}:/var/tmp/. routing-instance N1   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+
+    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp file from remote to local in routing instance
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/. routing-instance N1   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
 Check copied file size
     [Documentation]  check scp file correct
     [Arguments]  ${device}  ${filename}  ${size}
@@ -694,7 +723,7 @@ Config VR route instance
     ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
     ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm62']} next-hop ${tv['uv-r1_r0-ip6']}
     ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
 
 
     sleep   20s
