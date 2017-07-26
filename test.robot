@@ -99,23 +99,23 @@ SCP_TC_5
     ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance
     ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance
     ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance
-    [Tags]  scp with in route instance
+    [Tags]  scp with in routing instance
 
-    Config VR route instance
+    Config VR routing instance
 
-    Scp file from local to remote in route instance   server_ip=${tv['uv-r1_r0-ip']}
+    Scp file from local to remote in routing instance   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
     sleep   5s
-    Scp file from remote to local in route instance   server_ip=${tv['uv-r1_r0-ip']}
+    Scp file from remote to local in routing instance   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     Delete copied files
     sleep   5s
 
-    Scp file from local to remote with source address in route instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from local to remote with source address in routing instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
     sleep   5s
 
-    Scp file from remote to local with source address in route instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from remote to local with source address in routing instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     Delete copied files
     sleep   5s
@@ -129,15 +129,15 @@ SCP_TC_5
     Delete copied files
     sleep   5s
 
-    Scp file from local to remote with source address in route instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from local to remote with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address in route instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from remote to local with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
-    Delete VR route instance
+    Delete VR routing instance
 
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]

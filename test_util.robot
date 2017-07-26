@@ -747,8 +747,8 @@ Delete test files
      sleep  5s
 
 
-Config VR route instance
-    [Documentation]  Config VR route instance
+Config VR routing instance
+    [Documentation]  Config VR routing instance
 
     @{cmd_list_r0}     create list
     ...                set routing-instances N1 instance-type virtual-router
@@ -768,8 +768,8 @@ Config VR route instance
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 10
     should not contain     ${response2}     100% packet loss
 
-Delete VR route instance
-    [Documentation]  Config VR route instance
+Delete VR routing instance
+    [Documentation]  Config VR routing instance
 
     @{cmd_list_r0}     create list
     ...                delete routing-instances N1
