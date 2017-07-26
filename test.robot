@@ -95,10 +95,11 @@ SCP_TC_4
 
 SCP_TC_5
     [Documentation]
-    ...     Tc5.1-9  in default routing instance，scp file from local to remote with source-address for ipv6
-    ...     Tc5.1-9  in default routing instance，scp file from remote to local with source-address for ipv6
-
-    [Tags]  scp with source address in route instance
+    ...     Tc5.1-5  in default routing instance，scp file from local to remote in routing instance
+    ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance
+    ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance
+    ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance
+    [Tags]  scp with in route instance
 
     Config VR route instance
 
@@ -110,6 +111,16 @@ SCP_TC_5
     Scp file from remote to local in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
+
+    Scp file from local to remote with source address in route instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local with source address in route instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+
+    Delete VR route instance
 
 TWAMP_Server_Flow_Mode_TC_2
     [Documentation]

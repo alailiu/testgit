@@ -683,6 +683,35 @@ Scp file from remote to local in routing instance
     run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
+Scp file from local to remote with source address in routing instance
+    [Documentation]  Scp file from local to remote
+    [Arguments]  ${server_ip}  ${source_addr}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp /var/tmp/testfilelocal regress@${server_ip}:/var/tmp/. source-address ${source_addr} routing-instance N1   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+
+    run keyword if   '${status}'=='False'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp file from remote to local with source address in routing instance
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}  ${source_addr}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfileremote /var/tmp/. source-address ${source_addr} routing-instance N1    pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
 Check copied file size
     [Documentation]  check scp file correct
     [Arguments]  ${device}  ${filename}  ${size}
@@ -733,6 +762,24 @@ Config VR route instance
     should not contain     ${response2}     100% packet loss
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 10
     should not contain     ${response2}     100% packet loss
+
+Delete VR route instance
+    [Documentation]  Config VR route instance
+
+    @{cmd_list_r0}     create list
+    ...                delete routing-instances N1
+    ...                commit
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
+
+
+    sleep   20s
+    ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
+    should not contain     ${response1}     100% packet loss
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
+    should not contain     ${response2}     100% packet loss
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} count 10
+    should not contain     ${response2}     100% packet loss
+
 
 Delete the Twamp Configuration
     [Documentation]  Delete the Twamp Configuration
