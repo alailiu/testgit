@@ -282,27 +282,43 @@ Init the Configurations on two nodes in Flow Mode
     @{cmd_list_r0}     create list
     ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
     ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet6 address ${tv['uv-r0_r1-ip6']}/${tv['uv-mask6']}
+    ...                set interfaces ${tv['r0__r0r1_2__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip2']}/${tv['uv-mask']}
+    ...                set interfaces ${tv['r0__r0r1_2__pic']} unit 0 family inet6 address ${tv['uv-r0_r1-ip62']}/${tv['uv-mask6']}
     ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r0_r1-ip-lo']}/${tv['uv-mask']}
     ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r0_r1-ip6-lo']}/${tv['uv-mask6']}
+    ...                set interfaces lo0 unit 1 family inet address ${tv['uv-r0_r1-ip-lo2']}/${tv['uv-mask']}
+    ...                set interfaces lo0 unit 1 family inet6 address ${tv['uv-r0_r1-ip6-lo2']}/${tv['uv-mask6']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r0__r0r1__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
-    ...                set routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
+    ...                set security zones security-zone trust2 host-inbound-traffic system-services all
+    ...                set security zones security-zone trust2 host-inbound-traffic protocols all
+    ...                set security zones security-zone trust2 interfaces ${tv['r0__r0r1_2__pic']}
+    ...                set security zones security-zone trust2 interfaces lo0.1
+    ...                set routing-options static route ${tv['uv-r1_r0-nm-lo']} next-hop ${tv['uv-r1_r0-ip']}
     ...                set routing-options rib inet6.0 static route ${tv['uv-r1_r0-nm6-lo']} next-hop ${tv['uv-r1_r0-ip6']}
+    ...                set routing-instances N1 instance-type virtual-router
+    ...                set routing-instances N1 interface ${tv['r0__r0r1_2__pic']}.0
+    ...                set routing-instances N1 interface lo0.0
+    ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm-lo2']} next-hop ${tv['uv-r1_r0-ip2']}
+    ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm6-lo2']} next-hop ${tv['uv-r1_r0-ip62']}
     ...                commit
     execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
 
     @{cmd_list_r1}     create list
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet6 address ${tv['uv-r1_r0-ip6']}/${tv['uv-mask6']}
+    ...                set interfaces ${tv['r1__r1r0_2__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip2']}/${tv['uv-mask']}
+    ...                set interfaces ${tv['r1__r1r0_2__pic']} unit 0 family inet6 address ${tv['uv-r1_r0-ip62']}/${tv['uv-mask6']}
     ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r1_r0-ip-lo']}/${tv['uv-mask']}
     ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r1_r0-ip6-lo']}/${tv['uv-mask6']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r1__r1r0__pic']}
+    ...                set security zones security-zone trust interfaces ${tv['r1__r1r0_2__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
     ...                set routing-options static route ${tv['uv-r0_r1-nm-lo']} next-hop ${tv['uv-r0_r1-ip']}
     ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm6-lo']} next-hop ${tv['uv-r0_r1-ip6']}
@@ -312,7 +328,7 @@ Init the Configurations on two nodes in Flow Mode
     sleep   20s
     ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
     should not contain     ${response1}     100% packet loss
-    ${response2}   execute cli command on device    device=${server}   command=ping ${client_ip} count 10
+    ${response2}   execute cli command on device    device=${server}   `command=ping ${client_ip} count 10
     should not contain     ${response2}     100% packet loss
     #sleep   50000000s
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
@@ -320,7 +336,7 @@ Init the Configurations on two nodes in Flow Mode
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6-lo']} source ${tv['uv-r0_r1-ip6-lo']} count 10
     should not contain     ${response2}     100% packet loss
 
-    #sleep   50000000s
+    sleep   50000000s
 
 Init the Configurations on three nodes in Flow Mode
     [Documentation]  Init the Configurations on three nodes in Flow Mode
@@ -808,8 +824,8 @@ Config VR routing instance
     ...                set routing-instances N1 instance-type virtual-router
     ...                set routing-instances N1 interface ${tv['r0__r0r1__pic']}.0
     ...                set routing-instances N1 interface lo0.0
-    ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
-    ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm62']} next-hop ${tv['uv-r1_r0-ip6']}
+    ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm-lo']} next-hop ${tv['uv-r1_r0-ip']}
+    ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm6-lo']} next-hop ${tv['uv-r1_r0-ip6']}
     ...                commit
     execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
 
@@ -819,7 +835,7 @@ Config VR routing instance
     should not contain     ${response1}     100% packet loss
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} routing-instance N1 count 30
     should not contain     ${response2}     100% packet loss
-    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} routing-instance N1 count 30
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6-lo']} source ${tv['uv-r0_r1-ip6-lo']} routing-instance N1 count 30
     should not contain     ${response2}     100% packet loss
 
 Delete VR routing instance
@@ -836,7 +852,7 @@ Delete VR routing instance
     should not contain     ${response1}     100% packet loss
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
     should not contain     ${response2}     100% packet loss
-    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} count 10
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6-lo']} source ${tv['uv-r0_r1-ip6-lo']} count 10
     should not contain     ${response2}     100% packet loss
 
 
