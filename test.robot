@@ -97,28 +97,41 @@ SCP_TC_5
     [Documentation]
     ...     Tc5.1-5  in default routing instance，scp file from local to remote in routing instance
     ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance
+    [Tags]  scp with in routing instance
+
+
+    Scp file from local to remote in routing instance   server_ip=${tv['uv-r1_r0-ip2']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+    sleep   5s
+    Scp file from remote to local in routing instance   server_ip=${tv['uv-r1_r0-ip2']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+
+
+SCP_TC_6
+    [Documentation]
     ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance
     ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance
     [Tags]  scp with in routing instance
 
-    Config VR routing instance
 
-    Scp file from local to remote in routing instance   server_ip=${tv['uv-r1_r0-ip']}
-    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
-    sleep   5s
-    Scp file from remote to local in routing instance   server_ip=${tv['uv-r1_r0-ip']}
-    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
-    Delete copied files
-    sleep   5s
 
-    Scp file from local to remote with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
+    Scp file from local to remote with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo2']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
     sleep   5s
 
-    Scp file from remote to local with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
+    Scp file from remote to local with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo2']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
-    Delete copied files
     sleep   5s
+
+SCP_TC_7
+    [Documentation]
+    ...     Tc5.1-5  in default routing instance，scp file from local to remote in routing instance for ipv6
+    ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance for ipv6
+    [Tags]  scp with in routing instance
+
+
+
 
     Scp file from local to remote in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
@@ -126,29 +139,35 @@ SCP_TC_5
     sleep   5s
     Scp file from remote to local in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
-    Delete copied files
+
     sleep   5s
 
-    Scp file from local to remote with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
+SCP_TC_8
+    [Documentation]
+    ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance for ipv6
+    ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance for ipv6
+    [Tags]  scp with in routing instance
+
+
+
+    Scp file from local to remote with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo2']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
+    Scp file from remote to local with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo2']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
-    Delete VR routing instance
 
 
-
-SCP_TC_6
+SCP_TC_9
     [Documentation]
     ...     Tc5.1-10  scp authenticity test
     [Tags]  scp command interactive test
     Scp interactive test
 
 
-SCP_TC_7
+SCP_TC_10
     [Documentation]
     ...     Tc5.1-11  scp with recursive option
     [Tags]  scp with recursive option
