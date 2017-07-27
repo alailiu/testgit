@@ -52,7 +52,7 @@ r0 {
         }
     }
     interfaces {
-        R0R1 {
+        R0R1_2 {
             link    "connect2";
         }
     }
@@ -71,7 +71,7 @@ r1 {
         }
    }
    interfaces {
-        R1R0 {
+        R1R0_2 {
             link    "connect2";
         }
     }
