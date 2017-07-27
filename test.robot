@@ -53,11 +53,11 @@ SCP_TC_2
     [Tags]  scp with source address
 
 
-    Scp file from local to remote with source address  server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from local to remote with source address  server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address  server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from remote to local with source address  server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
@@ -85,11 +85,11 @@ SCP_TC_4
     [Tags]  scp with source address
 
     #sleep   50000000s
-    Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from remote to local with source address  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 
@@ -111,29 +111,29 @@ SCP_TC_5
     Delete copied files
     sleep   5s
 
-    Scp file from local to remote with source address in routing instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from local to remote with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
     sleep   5s
 
-    Scp file from remote to local with source address in routing instance   server_ip=${tv['uv-r1_r0-ip2']}  source_addr=${tv['uv-r0_r1-ip2']}
+    Scp file from remote to local with source address in routing instance   server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     Delete copied files
     sleep   5s
 
-    Scp file from local to remote in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]
+    Scp file from local to remote in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]
+    Scp file from remote to local in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     Delete copied files
     sleep   5s
 
-    Scp file from local to remote with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from local to remote with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
 
     sleep   5s
-    Scp file from remote to local with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip62']}]  source_addr=${tv['uv-r0_r1-ip62']}
+    Scp file from remote to local with source address in routing instance  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
 

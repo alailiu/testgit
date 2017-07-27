@@ -282,30 +282,30 @@ Init the Configurations on two nodes in Flow Mode
     @{cmd_list_r0}     create list
     ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
     ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet6 address ${tv['uv-r0_r1-ip6']}/${tv['uv-mask6']}
-    ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r0_r1-ip2']}/${tv['uv-mask']}
-    ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r0_r1-ip62']}/${tv['uv-mask6']}
+    ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r0_r1-ip-lo']}/${tv['uv-mask']}
+    ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r0_r1-ip6-lo']}/${tv['uv-mask6']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r0__r0r1__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
     ...                set routing-options static route ${tv['uv-r1_r0-nm2']} next-hop ${tv['uv-r1_r0-ip']}
-    ...                set routing-options rib inet6.0 static route ${tv['uv-r1_r0-nm62']} next-hop ${tv['uv-r1_r0-ip6']}
+    ...                set routing-options rib inet6.0 static route ${tv['uv-r1_r0-nm6-lo']} next-hop ${tv['uv-r1_r0-ip6']}
     ...                commit
     execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
 
     @{cmd_list_r1}     create list
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
     ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet6 address ${tv['uv-r1_r0-ip6']}/${tv['uv-mask6']}
-    ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r1_r0-ip2']}/${tv['uv-mask']}
-    ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r1_r0-ip62']}/${tv['uv-mask6']}
+    ...                set interfaces lo0 unit 0 family inet address ${tv['uv-r1_r0-ip-lo']}/${tv['uv-mask']}
+    ...                set interfaces lo0 unit 0 family inet6 address ${tv['uv-r1_r0-ip6-lo']}/${tv['uv-mask6']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r1__r1r0__pic']}
     ...                set security zones security-zone trust interfaces lo0.0
-    ...                set routing-options static route ${tv['uv-r0_r1-nm2']} next-hop ${tv['uv-r0_r1-ip']}
-    ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm62']} next-hop ${tv['uv-r0_r1-ip6']}
+    ...                set routing-options static route ${tv['uv-r0_r1-nm-lo']} next-hop ${tv['uv-r0_r1-ip']}
+    ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm6-lo']} next-hop ${tv['uv-r0_r1-ip6']}
     ...                commit
     execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
 
@@ -317,7 +317,7 @@ Init the Configurations on two nodes in Flow Mode
     #sleep   50000000s
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
     should not contain     ${response2}     100% packet loss
-    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip62']} source ${tv['uv-r0_r1-ip62']} count 10
+    ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6-lo']} source ${tv['uv-r0_r1-ip6-lo']} count 10
     should not contain     ${response2}     100% packet loss
 
     #sleep   50000000s
