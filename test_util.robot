@@ -328,7 +328,7 @@ Init the Configurations on two nodes in Flow Mode
     sleep   20s
     ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
     should not contain     ${response1}     100% packet loss
-    ${response2}   execute cli command on device    device=${server}   `command=ping ${client_ip} count 10
+    ${response2}   execute cli command on device    device=${server}   command=ping ${client_ip} count 10
     should not contain     ${response2}     100% packet loss
     #sleep   50000000s
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6']} count 10
