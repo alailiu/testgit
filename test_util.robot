@@ -301,7 +301,7 @@ Init the Configurations on two nodes in Flow Mode
     ...                set routing-options rib inet6.0 static route ${tv['uv-r1_r0-nm6-lo']} next-hop ${tv['uv-r1_r0-ip6']}
     ...                set routing-instances N1 instance-type virtual-router
     ...                set routing-instances N1 interface ${tv['r0__r0r1_2__pic']}.0
-    ...                set routing-instances N1 interface lo0.0
+    ...                set routing-instances N1 interface lo0.1
     ...                set routing-instances N1 routing-options static route ${tv['uv-r1_r0-nm-lo2']} next-hop ${tv['uv-r1_r0-ip2']}
     ...                set routing-instances N1 routing-options rib N1.inet6.0 static route ${tv['uv-r1_r0-nm6-lo2']} next-hop ${tv['uv-r1_r0-ip62']}
     ...                commit
