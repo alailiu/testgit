@@ -322,6 +322,8 @@ Init the Configurations on two nodes in Flow Mode
     ...                set security zones security-zone trust interfaces lo0.0
     ...                set routing-options static route ${tv['uv-r0_r1-nm-lo']} next-hop ${tv['uv-r0_r1-ip']}
     ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm6-lo']} next-hop ${tv['uv-r0_r1-ip6']}
+    ...                set routing-options static route ${tv['uv-r0_r1-nm-lo2']} next-hop ${tv['uv-r0_r1-ip2']}
+    ...                set routing-options rib inet6.0 static route ${tv['uv-r0_r1-nm6-lo2']} next-hop ${tv['uv-r0_r1-ip62']}
     ...                commit
     execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
 
