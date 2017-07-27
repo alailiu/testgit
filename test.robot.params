@@ -51,6 +51,11 @@ r0 {
             link    "connect1";
         }
     }
+    interfaces {
+        R0R1 {
+            link    "connect2";
+        }
+    }
 }
 r1 {
     system {
@@ -65,4 +70,9 @@ r1 {
             link    "connect1";
         }
    }
+   interfaces {
+        R1R0 {
+            link    "connect2";
+        }
+    }
 }
