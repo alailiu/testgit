@@ -158,7 +158,7 @@ Initialize the test environment of Topology with two nodes
     set suite variable      ${target_addr}     ${tv['uv-r1_r0-ip']}
     set suite variable      ${client_ip}     ${tv['uv-r0_r1-ip']}
     Collect the basic data from devices    @{dh_list}
-    Cleanup the configurations from devices in Topology    @{device_list}
+    Cleanup the configurations from devices in Topology    @{dh_list}
 
 Initialize the test environment of HA
     [Documentation]  Initialize the test enviroment of HA
