@@ -343,7 +343,7 @@ Init the Configurations on two nodes in Flow Mode
     ${response2}   execute cli command on device    device=${client}   command=ping ${tv['uv-r1_r0-ip6-lo']} routing-instance N1 source ${tv['uv-r0_r1-ip6-lo2']} count 10
     should not contain     ${response2}     100% packet loss
 
-    sleep   50000000s
+    #sleep   50000000s
 
 Init the Configurations on three nodes in Flow Mode
     [Documentation]  Init the Configurations on three nodes in Flow Mode
