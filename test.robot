@@ -1,10 +1,10 @@
-Documentation                       RLI35194 Support TWAMP Server on Siege/Forge (Moto)
-...             Author             : Jianming Zhang
-...             Date               : 06/15/2017
-...             JTMS TEST PLAN     : http://systest.juniper.net/feature_testplan/44251/1.1
-...             RLI                : 35195
+Documentation                       RLI36300 scp support on Junos CLI with src-addr and vr options
+...             Author             : Ai Liu
+...             Date               : 07/25/2017
+...             JTMS TEST PLAN     : http://systest.juniper.net/feature_testplan/45429
+...             RLI                : 36300
 ...             MIN RELEASE        : 15.1
-...             MAIN FEATURE       : TWAMP Server
+...             MAIN FEATURE       : scp CLI
 ...             Platform Supported : SRX300, SRX320, SRX340, SRX345, SRX550m, SRX1500
 ...             CUSTOMER           : Moto
 

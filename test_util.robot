@@ -824,16 +824,10 @@ Delete copied files
     [Documentation]  delete copied files
 
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote
-     execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder
      sleep  5s
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfilelocal
-     execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
      sleep  5s
 
-     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
-     should contain     ${response}     No such
-     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfilelocal
-     should contain     ${response}     No such
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
      should contain     ${response}     No such
      ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfilelocal
