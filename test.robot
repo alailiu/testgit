@@ -44,6 +44,16 @@ SCP_TC_1
     Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
+    Delete copied files
+
+    Scp file from local to remote   server_ip=${t['resources']['r1']['system']['primary']['controllers']['re0']['hostname']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local   server_ip=${t['resources']['r1']['system']['primary']['controllers']['re0']['hostname']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+
 
 SCP_TC_2
     [Documentation]

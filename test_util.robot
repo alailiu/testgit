@@ -30,6 +30,7 @@ Cleanup the configurations from devices in Topology
     \      ...             delete groups global interfaces lo0
     \      ...             set system services ftp
     \      ...             set system services ssh
+    \      ...             set system domain-search [englab.juniper.net]
     \      Config Engine   device_list=${device}  cmd_list=@{cmd_list}   commit=true   commit_timeout=${120}
 
     sleep    5s
