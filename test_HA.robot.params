@@ -1,0 +1,62 @@
+
+fv-core-check    "enable";
+uv-topology-info  "                                                                   
+    +---------+           +-----------+
+    |         |           |           |
+    |   R0    |-----------|    R1     |
+    |         |           |   (HA)    |
+    +---------+           +-----------+
+  ";
+
+uv-r0_r1-ip    "100.10.1.1";
+uv-r1_r0-ip    "100.10.1.2";
+uv-r1_r2-ip    "110.10.1.1";
+uv-r2_r1-ip    "110.10.1.2";
+uv-r0_r1-nm    "100.10.1.0/24";
+uv-r1_r2-nm    "110.10.1.0/24";
+uv-mask        "24";
+uv-connection-name   "c1";
+uv-session-name      "t1";
+uv-probes-count      "2000";
+uv-port-range     "1to65535";
+uv-max-connections   "603";
+uv-max-connections-percli   "305";
+uv-port           "234";
+uv-connection-cnt   "40";
+uv-session-cnt      "15";
+uv-session-percon    "5";
+uv-inact-timeout     "2";
+uv-routing-instance   "twamp";
+uv-rtt-range          "-50000to50000";
+
+r0 {
+    system {
+        make        "juniper";
+        model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+    }
+    interfaces {
+        R0R1 {
+            link    "connect1";
+        }
+    }
+}
+r1 {
+    x-dut 1;
+    x-jsr-secure 1;
+    x-jsr-nodeid 0;
+    x-jsr-cc 1;
+    x-jsr-cc-primary 1;
+    system {
+        make        "juniper";
+        name         "c01-41";
+        model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+    }
+    interfaces {
+        R1R0_1 {
+            link    "connect1";
+        }
+        R1R0_2 {
+            link    "connect1";
+        }
+    }
+}
