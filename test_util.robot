@@ -32,6 +32,8 @@ Cleanup the configurations from devices in Topology
     \      ...             set system services ssh
     \      Config Engine   device_list=${device}  cmd_list=@{cmd_list}   commit=true   commit_timeout=${120}
 
+    sleep    5000000s
+
 Change the mgt inface of security zone for Flow Mode
     [Documentation]  Change the mgt interface to the groups global security zone
     [Arguments]  @{device_list}
