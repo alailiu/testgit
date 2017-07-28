@@ -32,7 +32,7 @@ Cleanup the configurations from devices in Topology
     \      ...             set system services ssh
     \      Config Engine   device_list=${device}  cmd_list=@{cmd_list}   commit=true   commit_timeout=${120}
 
-    sleep    5000000s
+    sleep    5s
 
 Change the mgt inface of security zone for Flow Mode
     [Documentation]  Change the mgt interface to the groups global security zone
@@ -625,7 +625,10 @@ Prepare test file on local and remote
      sleep  5s
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
      execute shell command on device      device=${server}   command=mkdir /var/tmp/folder
-    execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/folder/testfileremote
+     execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/folder/testfileremote
+
+     execute shell command on device      device=${client}   command=cp /var/tmp/testfilelocal /var/tmp/testfilelocal2
+     execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/testfileremote2
 
      sleep  5s
 
@@ -775,6 +778,35 @@ Scp folder from remote to local
     run keyword if   '${status}'=='False'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
+Scp folder from local to remote in routing instance
+    [Documentation]  Scp file from local to remote
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp recursive /var/tmp/folder/ regress@${server_ip}:/var/tmp/. routing-instance N1  pattern=(continue connecting|word)
+    ${status}   run keyword and return status   should contain   ${response}     fingerprint
+
+
+    run keyword if   '${status}'=='True'    Run Keywords   execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='False'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
+Scp folder from remote to local in routing instance
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp recursive regress@${server_ip}:/var/tmp/folder/ /var/tmp/. routing-instance N1  pattern=(continue connecting|word)
+    ${status}   run keyword and return status   should contain   ${response}     fingerprint
+
+    run keyword if   '${status}'=='True'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='False'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
 Check copied file size
     [Documentation]  check scp file correct
     [Arguments]  ${device}  ${filename}  ${size}
@@ -792,22 +824,43 @@ Delete copied files
     [Documentation]  delete copied files
 
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfileremote
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder
      sleep  5s
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfilelocal
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
      sleep  5s
 
      ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
      should contain     ${response}     No such
      ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfilelocal
      should contain     ${response}     No such
+     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfileremote
+     should contain     ${response}     No such
+     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfilelocal
+     should contain     ${response}     No such
+
+Delete copied folers
+    [Documentation]  delete copied files
+
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder/testfileremote
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder/testfilelocal
+     sleep  5s
+
+     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/folder/testfileremote
+     should contain     ${response}     No such
+     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/folder/testfilelocal
+     should contain     ${response}     No such
 
 Delete test files
     [Documentation]  delete copied test files
 
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfileremote
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfileremote2
      execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
      sleep  5s
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal2
      execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder
      sleep  5s
 

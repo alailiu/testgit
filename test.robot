@@ -179,6 +179,17 @@ SCP_TC_10
     Scp folder from remote to local   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${client}  filename=folder/testfileremote  size=${fileremotesize}
     sleep   5s
+    Delete copied folers
+
+SCP_TC_11
+    [Documentation]
+    ...     Tc5.1-12  multiple scp test
+    [Tags]  multiple scp test
+
+    Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+    Scp folder from local to remote in routing instance   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${server}  filename=folder/testfilelocal  size=${filelocalsize}
 
 
 # TWAMP_Server_Flow_Mode_TC_2
