@@ -542,7 +542,6 @@ Failover the Reduandancy Group 0
 
 Reset the redundancy group 1
     [Documentation]  Reset redundancy group 1
-    [Arguments]   ${node_num}
 
     execute cli command on device    device=${r1}   command=request chassis cluster failover reset redundancy-group 1
     sleep  20s
@@ -572,8 +571,6 @@ Failover the Reduandancy Group 1
 
     ${num}   Get the secondary node info of RG1
     ${response}   execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 1 node ${num}
-    ${status}   run keyword and return status   should contain   ${response}     Please reset it before requesting a failover
-    run keyword if   '${status}' == 'True'    Reset the redundancy group    node_num=${num}
     sleep  30s
 
 Restart the HA node

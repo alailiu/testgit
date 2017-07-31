@@ -32,8 +32,7 @@ Test Teardown    Run Keywords
 *** Test Cases ***
 SCP_TC_1
     [Documentation]
-    ...     Tc5.1-12  scp no node0
-    ...     Tc5.1-9  Verify the function of port for tcp connection
+    ...     Tc5.1-12  scp on HA
 
     [Tags]  SCP HA
 
