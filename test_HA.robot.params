@@ -33,7 +33,7 @@ r0 {
     system {
         make        "juniper";
         name         "beifang";
-        model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
         R0R1 {
@@ -50,7 +50,7 @@ r1 {
     system {
         make        "juniper";
         name         "e09-22";
-        model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
     }
     interfaces {
         R1R0_1 {
