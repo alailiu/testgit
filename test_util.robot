@@ -176,10 +176,10 @@ Initialize the test environment of HA
     set suite variable      ${server_interface}    reth0
     set suite variable      ${r0}
     set suite variable      ${r1}
-    set suite variable      ${client}      ${r0}
-    set suite variable      ${server}      ${r1}
-    set suite variable      ${client_node}     r0
-    set suite variable      ${server_node}     r1
+    set suite variable      ${client}      ${r1}
+    set suite variable      ${server}      ${r0}
+    set suite variable      ${client_node}     r1
+    set suite variable      ${server_node}     r0
     set suite variable      ${target_addr}     ${tv['uv-r0_r1-ip']}
     set suite variable      ${client_ip}     ${tv['uv-r1_r0-ip']}
     Collect the basic data from devices    @{dh_list}
@@ -450,7 +450,6 @@ Init the configurations of HA topology
     ...                set interfaces ${tv['r1__r1r0_1__pic']} gigether-options redundant-parent reth0
     ...                set interfaces ${tv['r1__r1r0_2__pic']} gigether-options redundant-parent reth0
     ...                set interfaces reth0 redundant-ether-options redundancy-group 1
-    ...                set chassis cluster redundancy-group 1 interface-monitor reth0
     ...                set interfaces reth0 unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
     ...                set security zones security-zone trust host-inbound-traffic system-services all
     ...                set security zones security-zone trust host-inbound-traffic protocols all
