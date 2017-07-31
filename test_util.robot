@@ -541,13 +541,12 @@ Failover the Reduandancy Group 0
     run keyword if   '${status}' == 'True'    Reset the redundancy group    node_num=${num}
     sleep  30s
 
-Reset the redundancy group
-    [Documentation]  Reset redundancy group 0
+Reset the redundancy group 1
+    [Documentation]  Reset redundancy group 1
     [Arguments]   ${node_num}
 
-    execute cli command on device    device=${r1}   command=request chassis cluster failover reset redundancy-group 0
+    execute cli command on device    device=${r1}   command=request chassis cluster failover reset redundancy-group 1
     sleep  20s
-    execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 0 node ${node_num}
 
 Set the primary node to handle
     [Documentation]  Set the primary node to handle
@@ -556,9 +555,9 @@ Set the primary node to handle
     ${num}    Get the primary node info of RG0
     run keyword if   ${num} == 0    Set Current System Node    device=${r1}   system_node=primary
     run keyword if   ${num} == 1   Set Current System Node    device=${r1}   system_node=slave
-    sleep   10s
+    sleep   120s
 
-Get the primary node info of RG0
+Get the primary node info of RG1
     [Documentation]  Get the primary node info of RG0
 
    # set test variable    ${pri_num}   none
@@ -569,13 +568,14 @@ Get the primary node info of RG0
     run keyword if   '${status2}'=='primary'    set test variable   ${pri_num}  1
     [Return]  ${pri_num}
 
-Faiover the Reduandancy Group 1
+Failover the Reduandancy Group 1
     [Documentation]  Failover the redundancy group 1
 
-    execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 1 node 0
-    sleep  60s
-    execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 1 node 1
-    sleep  60s
+    ${num}   Get the secondary node info of RG1
+    ${response}   execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 1 node ${num}
+    ${status}   run keyword and return status   should contain   ${response}     Please reset it before requesting a failover
+    run keyword if   '${status}' == 'True'    Reset the redundancy group    node_num=${num}
+    sleep  30s
 
 Restart the HA node
     [Documentation]  Restart the HA node
@@ -583,13 +583,13 @@ Restart the HA node
      reboot device      device=${r1}     timeout=${480}
      sleep  40s
 
-Get the secondary node info of RG0
+Get the secondary node info of RG1
     [Documentation]  Get the secondary node info of RG0
 
    # set test variable  ${node_num}  none
     ${response}    execute cli command on device    device=${r1}   command=show chassis cluster status |display xml
-    ${status1}   get element text   ${response}     chassis-cluster-status/redundancy-group[1]/device-stats/redundancy-group-status[1]
-    ${status2}   get element text   ${response}     chassis-cluster-status/redundancy-group[1]/device-stats/redundancy-group-status[2]
+    ${status1}   get element text   ${response}     chassis-cluster-status/redundancy-group[2]/device-stats/redundancy-group-status[1]
+    ${status2}   get element text   ${response}     chassis-cluster-status/redundancy-group[2]/device-stats/redundancy-group-status[2]
     run keyword if   '${status1}'=='secondary'     set test variable  ${node_num}   0
     run keyword if    '${status2}'=='secondary'    set test variable  ${node_num}   1
     [Return]  ${node_num}

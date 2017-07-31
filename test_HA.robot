@@ -16,16 +16,14 @@ Suite Setup      Run Keywords
 ...     Initialize the test environment of HA
 ...     Init the configurations of HA topology
 ...     Prepare test file on local and remote for HA
-Suite Teardown    Run Keywords
+Suite Teardown   Run Keywords
+...    Delete test files
 ...    Toby Suite Teardown
-#...    Cleanup toby configuration files on device    @{dh_list}
 
-Test Setup     Toby Test Setup
+Test Setup     Run Keywords
+...    Toby Test Setup
 Test Teardown    Run Keywords
-...    Stop twamp client connction
-...    Delete the Twamp Configuration
-...    Restore the routing instance to default
-...    Restore the interface with no policy for HA
+...    Delete copied files
 ...    Toby Test Teardown
 
 *** Variables ***
@@ -38,36 +36,27 @@ SCP_TC_1
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
     [Tags]  SCP HA
-    sleep   5000000
-    #Check Twamp Server basic function with default values
-    Config the twamp client with basic config  connection_name=${tv['uv-connection-name']}   session_name=${tv['uv-session-name']}  target_addr=${tv['uv-r1_r0-ip']}  probe_count=${tv['uv-probes-count']}
-    Config the twamp server with basic config  client_network=${tv['uv-r0_r1-nm']}
-    Start twamp client connction
-    Initialize Verification Engine    151_RLI35194_SRX_Twamp_Server.verify.yaml
-    Verify Twamp Server Control Connection  client_addr=${tv['uv-r0_r1-ip']}   port_range=${tv['uv-port-range']}  server_addr=${tv['uv-r1_r0-ip']}   server_port=862   session_cnt=1
-    Verify Twamp Server Test Session    sender_addr=${tv['uv-r0_r1-ip']}   port_range=${tv['uv-port-range']}   reflector_addr=${tv['uv-r1_r0-ip']}
-    Verify Twamp Client Control Connection    connection_name=${tv['uv-connection-name']}   client_addr=${tv['uv-r0_r1-ip']}   server_addr=${tv['uv-r1_r0-ip']}   server_port=862
-    Verify Twamp Client Test Session    connection_name=${tv['uv-connection-name']}    session_name=${tv['uv-session-name']}   sender_addr=${tv['uv-r0_r1-ip']}   reflector_addr=${tv['uv-r1_r0-ip']}
-    Verify Twamp Client Test Probes Basic Info    owner=${tv['uv-connection-name']}   test_name=${tv['uv-session-name']}  srv_addr=${tv['uv-r1_r0-ip']}   srv_port=862   client_addr=${tv['uv-r0_r1-ip']}  reflct_addr=${tv['uv-r1_r0-ip']}  sender_addr=${tv['uv-r0_r1-ip']}   test_size=${tv['uv-probes-count']}
-    Verify Twamp Client Test Probes Single Results   rtt_range=${tv['uv-rtt-range']}
-    Verify Twamp Client Test Probes Current Results  test_size=${tv['uv-probes-count']}  rtt_range=${tv['uv-rtt-range']}
-    Verify Twamp Client Test Probes One Sample Results  test_size=${tv['uv-probes-count']}  rtt_range=${tv['uv-rtt-range']}
-    Stop twamp client connction
 
-    #Check function of port for tcp connction
-    Configure Twamp Server Port  port=${tv['uv-port']}
-    Configure Twamp Client Connection Destination Port   connection_name=${tv['uv-connection-name']}   port=${tv['uv-port']}
-    Start twamp client connction
-    Verify Twamp Server Connection Port  port=${tv['uv-port']}
-    Verify Twamp Server Control Connection  client_addr=${tv['uv-r0_r1-ip']}   port_range=${tv['uv-port-range']}  server_addr=${tv['uv-r1_r0-ip']}   server_port=${tv['uv-port']}   session_cnt=1
-    Verify Twamp Server Test Session    sender_addr=${tv['uv-r0_r1-ip']}   port_range=${tv['uv-port-range']}   reflector_addr=${tv['uv-r1_r0-ip']}
-    Verify Twamp Client Control Connection    connection_name=${tv['uv-connection-name']}   client_addr=${tv['uv-r0_r1-ip']}   server_addr=${tv['uv-r1_r0-ip']}   server_port=${tv['uv-port']}
-    Verify Twamp Client Test Session    connection_name=${tv['uv-connection-name']}    session_name=${tv['uv-session-name']}   sender_addr=${tv['uv-r0_r1-ip']}   reflector_addr=${tv['uv-r1_r0-ip']}
-    Verify Twamp Client Test Probes Basic Info    owner=${tv['uv-connection-name']}   test_name=${tv['uv-session-name']}  srv_addr=${tv['uv-r1_r0-ip']}   srv_port=${tv['uv-port']}    client_addr=${tv['uv-r0_r1-ip']}  reflct_addr=${tv['uv-r1_r0-ip']}  sender_addr=${tv['uv-r0_r1-ip']}   test_size=${tv['uv-probes-count']}
-    Verify Twamp Client Test Probes Single Results   rtt_range=${tv['uv-rtt-range']}
-    Verify Twamp Client Test Probes Current Results  test_size=${tv['uv-probes-count']}  rtt_range=${tv['uv-rtt-range']}
-    Verify Twamp Client Test Probes One Sample Results  test_size=${tv['uv-probes-count']}  rtt_range=${tv['uv-rtt-range']}
-    Stop twamp client connction
+    Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+    Delete copied files
+
+
+    Failover the Reduandancy Group 1
+    Reset the redundancy group 1
+    Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local   server_ip=${tv['uv-r1_r0-ip']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
+    sleep   5000000
 
 
 TWAMP_Server_HA_TC_2

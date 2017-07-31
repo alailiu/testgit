@@ -40,8 +40,8 @@ Test Teardown   Run Keywords
 *** Test Cases ***
 SCP_TC_1
     [Documentation]
-    ...     Tc5.1-1  in default routing instance，scp file from local to remote
-    ...     Tc5.1-2  in default routing instance，scp file from remote to local
+    ...     Tc5.1-1  in default routing instance,scp file from local to remote
+    ...     Tc5.1-2  in default routing instance,scp file from remote to local
 
     [Tags]  scp
 
@@ -66,8 +66,8 @@ SCP_TC_1
 
 SCP_TC_2
     [Documentation]
-    ...     Tc5.1-3  in default routing instance，scp file from local to remote with source-address
-    ...     Tc5.1-4  in default routing instance，scp file from remote to local with source-address
+    ...     Tc5.1-3  in default routing instance,scp file from local to remote with source-address
+    ...     Tc5.1-4  in default routing instance,scp file from remote to local with source-address
 
     [Tags]  scp with source address
 
@@ -82,8 +82,8 @@ SCP_TC_2
 
 SCP_TC_3
     [Documentation]
-    ...     Tc5.1-9  in default routing instance，scp file from local to remote for ipv6
-    ...     Tc5.1-9  in default routing instance，scp file from remote to local for ipv6
+    ...     Tc5.1-9  in default routing instance,scp file from local to remote for ipv6
+    ...     Tc5.1-9  in default routing instance,scp file from remote to local for ipv6
 
     [Tags]  scp
 
@@ -98,8 +98,8 @@ SCP_TC_3
 
 SCP_TC_4
     [Documentation]
-    ...     Tc5.1-9  in default routing instance，scp file from local to remote with source-address for ipv6
-    ...     Tc5.1-9  in default routing instance，scp file from remote to local with source-address for ipv6
+    ...     Tc5.1-9  in default routing instance,scp file from local to remote with source-address for ipv6
+    ...     Tc5.1-9  in default routing instance,scp file from remote to local with source-address for ipv6
 
     [Tags]  scp with source address
 
@@ -114,8 +114,8 @@ SCP_TC_4
 
 SCP_TC_5
     [Documentation]
-    ...     Tc5.1-5  in default routing instance，scp file from local to remote in routing instance
-    ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance
+    ...     Tc5.1-5  in default routing instance,scp file from local to remote in routing instance
+    ...     Tc5.1-6  in default routing instance,scp file from remote to local in routing instance
     [Tags]  scp with in routing instance
 
 
@@ -129,8 +129,8 @@ SCP_TC_5
 
 SCP_TC_6
     [Documentation]
-    ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance
-    ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance
+    ...     Tc5.1-7  in default routing instance,scp file from local to remote with source-address in routing instance
+    ...     Tc5.1-8  in default routing instance,scp file from remote to local with source-address in routing instance
     [Tags]  scp with in routing instance
 
 
@@ -145,8 +145,8 @@ SCP_TC_6
 
 SCP_TC_7
     [Documentation]
-    ...     Tc5.1-5  in default routing instance，scp file from local to remote in routing instance for ipv6
-    ...     Tc5.1-6  in default routing instance，scp file from remote to local in routing instance for ipv6
+    ...     Tc5.1-5  in default routing instance,scp file from local to remote in routing instance for ipv6
+    ...     Tc5.1-6  in default routing instance,scp file from remote to local in routing instance for ipv6
     [Tags]  scp with in routing instance
 
 
@@ -163,8 +163,8 @@ SCP_TC_7
 
 SCP_TC_8
     [Documentation]
-    ...     Tc5.1-7  in default routing instance，scp file from local to remote with source-address in routing instance for ipv6
-    ...     Tc5.1-8  in default routing instance，scp file from remote to local with source-address in routing instance for ipv6
+    ...     Tc5.1-7  in default routing instance,scp file from local to remote with source-address in routing instance for ipv6
+    ...     Tc5.1-8  in default routing instance,scp file from remote to local with source-address in routing instance for ipv6
     [Tags]  scp with in routing instance
 
 
@@ -181,14 +181,14 @@ SCP_TC_8
 
 SCP_TC_9
     [Documentation]
-    ...     Tc5.1-10  scp authenticity test
+    ...     Tc5.1-10  scp authenticity test
     [Tags]  scp command interactive test
     Scp interactive test
 
 
 SCP_TC_10
     [Documentation]
-    ...     Tc5.1-11  scp with recursive option
+    ...     Tc5.1-11  scp with recursive option
     [Tags]  scp with recursive option
 
     Scp folder from local to remote   server_ip=${tv['uv-r1_r0-ip']}
@@ -202,7 +202,7 @@ SCP_TC_10
 
 SCP_TC_11
     [Documentation]
-    ...     Tc5.1-12  multiple scp test
+    ...     Tc5.1-12  multiple scp test
     [Tags]  multiple scp test
 
     Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
