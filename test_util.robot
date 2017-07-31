@@ -392,6 +392,14 @@ Set the primary node to handle
     run keyword if   ${num} == 1   Set Current System Node    device=${r1}   system_node=slave
     sleep   120s
 
+Set the secondary node to handle
+    [Documentation]  Set the primary node to handle
+
+    ${num}    Get the primary node info of RG0
+    run keyword if   ${num} == 0    Set Current System Node    device=${r1}   system_node=slave
+    run keyword if   ${num} == 1   Set Current System Node    device=${r1}   system_node=primary
+    sleep   10s
+
 Get the primary node info of RG0
     [Documentation]  Get the primary node info of RG0
 
