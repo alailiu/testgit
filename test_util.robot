@@ -448,7 +448,7 @@ Init the configurations of HA topology
     ...                commit
     execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
 
-    sleep   20s
+    sleep   200000000s
     ${response1}   execute cli command on device    device=${r0}   command=ping ${tv['uv-r1_r0-ip']} count 10
     should not contain     ${response1}     100% packet loss
     ${response2}   execute cli command on device    device=${r1}   command=ping ${tv['uv-r0_r1-ip']} count 10
