@@ -456,7 +456,7 @@ Init the configurations of HA topology
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces reth0
     ...                commit
-    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
+    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${250}
 
     @{cmd_list_r0}     create list
     ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
@@ -465,7 +465,7 @@ Init the configurations of HA topology
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces ${tv['r0__r0r1__pic']}
     ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${250}
 
     sleep   30s
     ${response1}   execute cli command on device    device=${r0}   command=ping ${tv['uv-r1_r0-ip']} count 30
