@@ -1,16 +1,16 @@
 Documentation                       RLI35194 Support TWAMP Server on Siege/Forge (Moto)
-...             Author             : Jianming Zhang
-...             Date               : 06/15/2017
-...             JTMS TEST PLAN     : http://systest.juniper.net/feature_testplan/44251/1.1
-...             RLI                : 35194
+...             Author             : Allen Ai Liu
+...             Date               : 07/30/2017
+...             JTMS TEST PLAN     : http://systest.juniper.net/feature_testplan/45429
+...             RLI                : 36300
 ...             MIN RELEASE        : 15.1
 ...             MAIN FEATURE       : TWAMP Client
-...             Platform Supported : SRX300, SRX320, SRX340, SRX345, SRX550m, SRX1500
+...             Platform Supported : SRX300, SRX320, SRX340, SRX345
 ...             CUSTOMER           : Moto
 
 *** Settings ***
 Resource   jnpr/toby/Master.robot
-Resource   151_RLI35194_SRX_Twamp_Server_util.robot
+Resource   test_util.robot
 Suite Setup      Run Keywords
 ...     Toby Suite Setup
 ...     Initialize the test environment of HA
@@ -31,13 +31,13 @@ Test Teardown    Run Keywords
 
 
 *** Test Cases ***
-TWAMP_Server_HA_TC_1
+SCP_TC_1
     [Documentation]
     ...     Tc5.1-1  Verify TWAMP Server basic function with default values
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
-    [Tags]  TWAMP_Server  Flow_Mode
-
+    [Tags]  SCP HA
+    sleep 5000000
     #Check Twamp Server basic function with default values
     Config the twamp client with basic config  connection_name=${tv['uv-connection-name']}   session_name=${tv['uv-session-name']}  target_addr=${tv['uv-r1_r0-ip']}  probe_count=${tv['uv-probes-count']}
     Config the twamp server with basic config  client_network=${tv['uv-r0_r1-nm']}
