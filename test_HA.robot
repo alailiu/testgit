@@ -72,7 +72,7 @@ SCP_TC_1
     Reset the redundancy group 0
 
     Set the secondary node to handle
-    Scp file from remote to local no node1   server_ip=${t['resources']['r1']['system']['primary']['controllers']['re0']['mgt-ip']}
+    Scp file from remote to local on node1   server_ip=${t['resources']['r1']['system']['primary']['controllers']['re0']['mgt-ip']}
     Check copied file size   device=${client}  filename=testfilelocal  size=${filelocalsize}
     sleep   5s
 
