@@ -15,6 +15,7 @@ Suite Setup      Run Keywords
 ...     Toby Suite Setup
 ...     Initialize the test environment of HA
 ...     Init the configurations of HA topology
+...     Prepare test file on local and remote for HA
 Suite Teardown    Run Keywords
 ...    Toby Suite Teardown
 #...    Cleanup toby configuration files on device    @{dh_list}
@@ -33,11 +34,11 @@ Test Teardown    Run Keywords
 *** Test Cases ***
 SCP_TC_1
     [Documentation]
-    ...     Tc5.1-1  Verify TWAMP Server basic function with default values
+    ...     Tc5.1-12  scp no node0
     ...     Tc5.1-9  Verify the function of port for tcp connection
 
     [Tags]  SCP HA
-    sleep 5000000
+    sleep   5000000
     #Check Twamp Server basic function with default values
     Config the twamp client with basic config  connection_name=${tv['uv-connection-name']}   session_name=${tv['uv-session-name']}  target_addr=${tv['uv-r1_r0-ip']}  probe_count=${tv['uv-probes-count']}
     Config the twamp server with basic config  client_network=${tv['uv-r0_r1-nm']}

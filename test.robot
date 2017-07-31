@@ -13,15 +13,24 @@ Documentation                       RLI36300 scp support on Junos CLI with src-a
 Resource   jnpr/toby/Master.robot
 Resource   test_util.robot
 Suite Setup      Run Keywords
+...     Toby Suite Setup
 ...     Initialize the test environment of Topology with two nodes
 ...     Check all the devices on Flow Mode
 ...     Init the Configurations on two nodes in Flow Mode
 ...     Prepare test file on local and remote
 #Suite Teardown   Cleanup toby configuration files on device    @{dh_list}
-Test Teardown   Run Keywords
-...    Delete copied files
+
 Suite Teardown   Run Keywords
 ...    Delete test files
+...    Clear the Configurations on two nodes in Flow Mode
+...    Toby Suite Teardown
+
+Test Setup     Run Keywords
+...    Toby Test Setup
+Test Teardown   Run Keywords
+...    Delete copied files
+...    Toby Test Teardown
+
 
 
 *** Variables ***

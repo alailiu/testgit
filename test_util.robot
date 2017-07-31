@@ -350,6 +350,27 @@ Init the Configurations on two nodes in Flow Mode
     should not contain     ${response2}     100% packet loss
     #sleep   50000000s
 
+Clear the Configurations on two nodes in Flow Mode
+    [Documentation]   Init configurations on two devices which in flow mode
+    #Init the configuration on the devices
+    @{cmd_list_r0}     create list
+    ...                delete interfaces
+    ...                delete security
+    ...                delete routing-options
+    ...                delete routing-instances
+    ...                commit
+    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
+
+    @{cmd_list_r1}     create list
+    ...                delete interfaces
+    ...                delete security
+    ...                delete routing-options
+    ...                delete routing-instances
+    ...                commit
+    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
+
+    sleep   20s
+
 Init the Configurations on three nodes in Flow Mode
     [Documentation]  Init the Configurations on three nodes in Flow Mode
     @{cmd_list_r0}     create list
@@ -435,7 +456,6 @@ Init the configurations of HA topology
     ...                set security zones security-zone trust host-inbound-traffic protocols all
     ...                set security policies default-policy permit-all
     ...                set security zones security-zone trust interfaces reth0
-    ...                set chassis cluster redundancy-group 1 interface-monitor reth0 weight 255
     ...                commit
     execute config command on device      device=${r1}   command_list=@{cmd_list_r1}   timeout=${150}
 
@@ -634,6 +654,44 @@ Prepare test file on local and remote
      execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/testfileremote2
 
      sleep  5s
+
+
+Prepare test file on local and remote for HA
+    [Documentation]  Config the twamp server with default config
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/testfilelocal
+     sleep  5s
+     Save Device Configuration      device=${client}   file=/var/tmp/testfilelocal
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/testfileremote
+     sleep  5s
+     Save Device Configuration      device=${server}   file=/var/tmp/testfileremote
+     sleep  5s
+
+     ${response}    execute shell command on device      device=${client}   command=ls -al /var/tmp/testfilelocal
+     ${ls}   ${localsize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
+     #Log to Console    "hbhbhb\n\n\n${localsize}\n\n\nhbhbhb"
+
+     set suite variable      ${filelocalsize}      ${localsize}
+
+     ${response}    execute shell command on device      device=${server}   command=ls -al /var/tmp/testfileremote
+     ${ls}   ${remotesize} =   Should Match Regexp    ${response}    \\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+
+     #Log to Console    "hbhbhb\n\n\n${remotesize}\n\n\nhbhbhb"
+
+     set suite variable      ${fileremotesize}      ${remotesize}
+
+     execute shell command on device      device=${client}   command=rm -rf /var/tmp/folder
+     execute shell command on device      device=${client}   command=mkdir /var/tmp/folder
+     execute shell command on device      device=${client}   command=cp /var/tmp/testfilelocal /var/tmp/folder/testfilelocal
+     sleep  5s
+     execute shell command on device      device=${server}   command=rm -rf /var/tmp/folder
+     execute shell command on device      device=${server}   command=mkdir /var/tmp/folder
+     execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/folder/testfileremote
+
+     execute shell command on device      device=${client}   command=cp /var/tmp/testfilelocal /var/tmp/testfilelocal2
+     execute shell command on device      device=${server}   command=cp /var/tmp/testfileremote /var/tmp/testfileremote2
+
+     sleep  5s
+
 
 
 Scp file from local to remote
