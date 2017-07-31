@@ -392,7 +392,7 @@ Set the primary node to handle
     run keyword if   ${num} == 1   Set Current System Node    device=${r1}   system_node=slave
     sleep   120s
 
-Get the primary node info of RG1
+Get the primary node info of RG0
     [Documentation]  Get the primary node info of RG0
 
    # set test variable    ${pri_num}   none
