@@ -367,7 +367,7 @@ Failover the Reduandancy Group 0
     [Documentation]  Failover the redundancy group 0
 
     ${num}   Get the secondary node info of RG0
-    ${response}   execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 0 node ${num}
+    ${response}   execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 0 node ${num}   pattern=(failover for redundancy group 0)
     sleep  30s
 
 Reset the redundancy group 0
