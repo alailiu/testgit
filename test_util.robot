@@ -586,6 +586,21 @@ Scp file from remote to local
     run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
     sleep  20s
 
+
+Scp file from remote to local on node1
+    [Documentation]  Scp file from remote to local
+    [Arguments]  ${server_ip}
+
+
+    ${response}    execute cli command on device      device=${client}   command=scp regress@${server_ip}:/var/tmp/testfilelocal /var/tmp/.   pattern=(no|word)
+    ${status}   run keyword and return status   should contain   ${response}     Pass
+
+    run keyword if   '${status}'=='False'    Run Keywords     execute cli command on device      device=${client}   command=yes   pattern=(word)   AND   execute cli command on device      device=${client}   command=MaRtInI
+
+
+    run keyword if   '${status}'=='True'    execute cli command on device      device=${client}   command=MaRtInI
+    sleep  20s
+
 Scp file from local to remote with source address
     [Documentation]  Scp file from local to remote
     [Arguments]  ${server_ip}  ${source_addr}
