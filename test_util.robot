@@ -228,56 +228,7 @@ Initialize the test environment of HA
 
     execute config command on device      device=${r0}   command_list=@{cmd_lst_r0}   timeout=${150}
 
-Initialize the test environment of Topology with three nodes
-    [Documentation]   Initialize the test environment of Topology consist of three nodes
 
-    Toby Suite Setup
-    @{device_list}   create list    r0    r1   r2
-    ${r0}    Get handle    resource=r0
-    ${r1}    Get Handle    resource=r1
-    ${r2}    Get Handle    resource=r2
-    @{dh_list}   create list    ${r0}    ${r1}    ${r2}
-    set suite variable      @{dh_list}
-    set suite variable      @{device_list}
-    set suite variable      ${r0}
-    set suite variable      ${r1}
-    set suite variable      ${r2}
-    set suite variable      ${client}      ${r0}
-    set suite variable      ${trasit}      ${r1}
-    set suite variable      ${server}      ${r2}
-    set suite variable      ${client_node}     r0
-    set suite variable      ${transit_node}    r1
-    set suite variable      ${server_node}     r2
-    set suite variable      ${target_addr}     ${tv['uv-r2_r1-ip']}
-    set suite variable      ${client_ip}    ${tv['uv-r0_r1-ip']}
-    Collect the basic data from devices    @{dh_list}
-    Change the mgt inface of security zone for Flow Mode    @{device_list}
-    Cleanup the configurations from devices in Topology     @{device_list}
-
-Initialize the test environment of Topology with three nodes for Packet Mode
-    [Documentation]   Initialize the test environment of Topology consist of three nodes
-
-    Toby Suite Setup
-    @{device_list}   create list    r0    r1   r2
-    ${r0}    Get handle    resource=r0
-    ${r1}    Get Handle    resource=r1
-    ${r2}    Get Handle    resource=r2
-    @{dh_list}   create list    ${r0}    ${r1}    ${r2}
-    set suite variable      @{dh_list}
-    set suite variable      @{device_list}
-    set suite variable      ${r0}
-    set suite variable      ${r1}
-    set suite variable      ${r2}
-    set suite variable      ${client}      ${r0}
-    set suite variable      ${trasit}      ${r1}
-    set suite variable      ${server}      ${r2}
-    set suite variable      ${client_node}     r0
-    set suite variable      ${transit_node}    r1
-    set suite variable      ${server_node}     r2
-    set suite variable      ${target_addr}     ${tv['uv-r2_r1-ip']}
-    set suite variable      ${client_ip}    ${tv['uv-r0_r1-ip']}
-    Collect the basic data from devices    @{dh_list}
-    Cleanup the configurations from devices in Topology     @{device_list}
 
 Init the Configurations on two nodes in Flow Mode
     [Documentation]   Init configurations on two devices which in flow mode
@@ -371,72 +322,7 @@ Clear the Configurations on two nodes in Flow Mode
 
     sleep   20s
 
-Init the Configurations on three nodes in Flow Mode
-    [Documentation]  Init the Configurations on three nodes in Flow Mode
-    @{cmd_list_r0}     create list
-    ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
-    ...                set security zones security-zone trust host-inbound-traffic system-services all
-    ...                set security zones security-zone trust host-inbound-traffic protocols all
-    ...                set security policies default-policy permit-all
-    ...                set security zones security-zone trust interfaces ${tv['r0__r0r1__pic']}
-    ...                set routing-options static route ${tv['uv-r2_r1-ip']} next-hop ${tv['uv-r1_r0-ip']}
-    ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
 
-    @{cmd_list_r1}     create list
-    ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
-    ...                set interfaces ${tv['r1__r1r2__pic']} unit 0 family inet address ${tv['uv-r1_r2-ip']}/${tv['uv-mask']}
-    ...                set security zones security-zone trust host-inbound-traffic system-services all
-    ...                set security zones security-zone trust host-inbound-traffic protocols all
-    ...                set security policies default-policy permit-all
-    ...                set security zones security-zone trust interfaces ${tv['r1__r1r0__pic']}
-    ...                set security zones security-zone trust interfaces ${tv['r1__r1r2__pic']}
-    ...                commit
-    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}
-
-    @{cmd_list_r2}     create list
-    ...                set interfaces ${tv['r2__r2r1__pic']} unit 0 family inet address ${tv['uv-r2_r1-ip']}/${tv['uv-mask']}
-    ...                set security zones security-zone trust host-inbound-traffic system-services all
-    ...                set security zones security-zone trust host-inbound-traffic protocols all
-    ...                set security policies default-policy permit-all
-    ...                set security zones security-zone trust interfaces ${tv['r2__r1r1__pic']}
-    ...                set routing-options static route ${tv['uv-r0_r1-ip']} next-hop ${tv['uv-r1_r2-ip']}
-    ...                commit
-    execute config command on device      device=${r2}   command_list=@{cmd_list_r2}
-
-    sleep   20s
-    ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
-     should not contain     ${response1}     100% packet loss
-     ${response2}   execute cli command on device    device=${server}   command=ping ${client_ip} count 10
-     should not contain     ${response2}     100% packet loss
-
-
-Init the Configurations on three nodes in Packet Mode
-    [Documentation]  Init Configrations on three nodes with Packet Mode
-    #Init the configuration on the devices
-    @{cmd_list_r0}     create list
-    ...                set interfaces ${tv['r0__r0r1__pic']} unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
-    ...                set routing-options static route ${tv['uv-r2_r1-ip']} next-hop ${tv['uv-r1_r0-ip']}
-    ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}
-
-    @{cmd_list_r1}     create list
-    ...                set interfaces ${tv['r1__r1r0__pic']} unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
-    ...                set interfaces ${tv['r1__r1r2__pic']} unit 0 family inet address ${tv['uv-r1_r2-ip']}/${tv['uv-mask']}
-    ...                commit
-    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}
-
-    @{cmd_list_r2}     create list
-    ...                set interfaces ${tv['r2__r2r1__pic']} unit 0 family inet address ${tv['uv-r2_r1-ip']}/${tv['uv-mask']}
-    ...                set routing-options static route ${tv['uv-r0_r1-ip']} next-hop ${tv['uv-r1_r2-ip']}
-    ...                commit
-    execute config command on device      device=${r2}   command_list=@{cmd_list_r2}
-
-     sleep  20s
-     ${response1}   execute cli command on device    device=${client}   command=ping ${target_addr} count 10
-     should not contain     ${response1}     100% packet loss
-     ${response2}   execute cli command on device    device=${server}   command=ping ${client_ip} count 10
-     should not contain     ${response2}     100% packet loss
 
 Init the configurations of HA topology
     [Documentation]  Init the configuraitons of HA topo
@@ -474,71 +360,22 @@ Init the configurations of HA topology
     should not contain     ${response2}     100% packet loss
 
 
-Initialize the test environment of Topology with LAG
-    [Documentation]   Initialize the test environment of Topology with LAG
 
-    Toby Suite Setup
-    @{device_list}   create list    r0    r1
-    ${r0}    Get handle    resource=r0
-    ${r1}    Get Handle    resource=r1
-    @{dh_list}   create list    ${r0}    ${r1}
-    ${client_interface}   Set Variable      ae0
-    ${server_interface}   Set Variable      ae0
-    set suite variable      @{dh_list}
-    set suite variable      @{device_list}
-    set suite variable      ${r0}
-    set suite variable      ${r1}
-    set suite variable      ${client}      ${r0}
-    set suite variable      ${server}      ${r1}
-    set suite variable      ${target_addr}     ${tv['uv-r1_r0-ip']}
-    set suite variable      ${client_ip}     ${tv['uv-r0_r1-ip']}
-    set suite variable      ${client_interface}
-    set suite variable      ${server_interface}
-    Collect the basic data from devices    @{dh_list}
-    Cleanup the configurations from devices in Topology    @{device_list}
 
-Init the configurations of LAG topology
-    [Documentation]  Init the configuraitons of LAG topo
-
-    @{cmd_list_r0}     create list
-    ...                set chassis aggregated-devices ethernet device-count 4
-    ...                set interfaces ${tv['r0__r0r1_1__pic']} gigether-options 802.3ad ae0
-    ...                set interfaces ${tv['r0__r0r1_2__pic']} gigether-options 802.3ad ae0
-    ...                set interfaces ae0 unit 0 family inet address ${tv['uv-r0_r1-ip']}/${tv['uv-mask']}
-    ...                set security zones security-zone trust host-inbound-traffic system-services all
-    ...                set security zones security-zone trust host-inbound-traffic protocols all
-    ...                set security policies default-policy permit-all
-    ...                set security zones security-zone trust interfaces ae0
-    ...                set interfaces ae0 aggregated-ether-options lacp active
-    ...                commit
-    execute config command on device      device=${r0}   command_list=@{cmd_list_r0}   timeout=${150}
-
-    @{cmd_list_r1}     create list
-    ...                set chassis aggregated-devices ethernet device-count 4
-    ...                set interfaces ${tv['r1__r1r0_1__pic']} gigether-options 802.3ad ae0
-    ...                set interfaces ${tv['r1__r1r0_2__pic']} gigether-options 802.3ad ae0
-    ...                set interfaces ae0 unit 0 family inet address ${tv['uv-r1_r0-ip']}/${tv['uv-mask']}
-    ...                set security zones security-zone trust host-inbound-traffic system-services all
-    ...                set security zones security-zone trust host-inbound-traffic protocols all
-    ...                set security policies default-policy permit-all
-    ...                set security zones security-zone trust interfaces ae0
-    ...                set interfaces ae0 aggregated-ether-options lacp active
-    ...                commit
-    execute config command on device      device=${r1}   command_list=@{cmd_list_r1}  timeout=${150}
-
-    sleep   20s
-    ${response1}   execute cli command on device    device=${r0}   command=ping ${tv['uv-r1_r0-ip']} count 10
-    should not contain     ${response1}     100% packet loss
-    ${response2}   execute cli command on device    device=${r1}   command=ping ${tv['uv-r0_r1-ip']} count 10
 
 Failover the Reduandancy Group 0
     [Documentation]  Failover the redundancy group 0
 
     ${num}   Get the secondary node info of RG0
     ${response}   execute cli command on device    device=${r1}   command=request chassis cluster failover redundancy-group 0 node ${num}
-    ${status}   run keyword and return status   should contain   ${response}     Please reset it before requesting a failover
-    run keyword if   '${status}' == 'True'    Reset the redundancy group    node_num=${num}
     sleep  30s
+
+Reset the redundancy group 0
+    [Documentation]  Reset redundancy group 1
+
+    execute cli command on device    device=${r1}   command=request chassis cluster failover reset redundancy-group 0
+    sleep  20s
+
 
 Reset the redundancy group 1
     [Documentation]  Reset redundancy group 1
@@ -566,6 +403,17 @@ Get the primary node info of RG1
     run keyword if   '${status2}'=='primary'    set test variable   ${pri_num}  1
     [Return]  ${pri_num}
 
+Get the primary node info of RG1
+    [Documentation]  Get the primary node info of RG1
+
+   # set test variable    ${pri_num}   none
+    ${response}    execute cli command on device    device=${r1}   command=show chassis cluster status |display xml
+    ${status1}   get element text   ${response}     chassis-cluster-status/redundancy-group[2]/device-stats/redundancy-group-status[1]
+    ${status2}   get element text   ${response}     chassis-cluster-status/redundancy-group[2]/device-stats/redundancy-group-status[2]
+    run keyword if   '${status1}'=='primary'    set test variable   ${pri_num}  0
+    run keyword if   '${status2}'=='primary'    set test variable   ${pri_num}  1
+    [Return]  ${pri_num}
+
 Failover the Reduandancy Group 1
     [Documentation]  Failover the redundancy group 1
 
@@ -579,8 +427,19 @@ Restart the HA node
      reboot device      device=${r1}     timeout=${480}
      sleep  40s
 
-Get the secondary node info of RG1
+Get the secondary node info of RG0
     [Documentation]  Get the secondary node info of RG0
+
+   # set test variable  ${node_num}  none
+    ${response}    execute cli command on device    device=${r1}   command=show chassis cluster status |display xml
+    ${status1}   get element text   ${response}     chassis-cluster-status/redundancy-group[1]/device-stats/redundancy-group-status[1]
+    ${status2}   get element text   ${response}     chassis-cluster-status/redundancy-group[1]/device-stats/redundancy-group-status[2]
+    run keyword if   '${status1}'=='secondary'     set test variable  ${node_num}   0
+    run keyword if    '${status2}'=='secondary'    set test variable  ${node_num}   1
+    [Return]  ${node_num}
+
+Get the secondary node info of RG1
+    [Documentation]  Get the secondary node info of RG1
 
    # set test variable  ${node_num}  none
     ${response}    execute cli command on device    device=${r1}   command=show chassis cluster status |display xml

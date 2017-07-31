@@ -55,6 +55,18 @@ SCP_TC_1
     Scp file from remote to local   server_ip=${tv['uv-r0_r1-ip']}
     Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
     sleep   5s
+    Delete copied files
+
+    Failover the Reduandancy Group 0
+    Set the primary node to handle
+    Reset the redundancy group 0
+    Scp file from local to remote   server_ip=${tv['uv-r0_r1-ip']}
+    Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
+
+    sleep   5s
+    Scp file from remote to local   server_ip=${tv['uv-r0_r1-ip']}
+    Check copied file size   device=${client}  filename=testfileremote  size=${fileremotesize}
+    sleep   5s
     sleep   5000000
 
 
