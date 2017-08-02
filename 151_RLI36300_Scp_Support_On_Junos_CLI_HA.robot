@@ -10,7 +10,7 @@ Documentation                       RLI35194 Support TWAMP Server on Siege/Forge
 
 *** Settings ***
 Resource   jnpr/toby/Master.robot
-Resource   test_util.robot
+Resource   151_RLI36300_Scp_Support_On_Junos_CLI_util.robot
 Suite Setup      Run Keywords
 ...     Toby Suite Setup
 ...     Initialize the test environment of HA
