@@ -18,6 +18,7 @@ Suite Setup      Run Keywords
 ...     Prepare test file on local and remote for HA
 Suite Teardown   Run Keywords
 ...    Delete test files
+...    Clear the configurations of HA topology
 ...    Toby Suite Teardown
 
 Test Setup     Run Keywords
