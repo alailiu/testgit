@@ -52,7 +52,7 @@ r0 {
         make        "juniper";
         name "e10-36";
         #name "vsrx2-esx-cn16";
-        #model       (or  "srx650" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #model       (or  "srx650" "srx300" "srx320" "srx340" "srx345" "srx550m" );
     }
     interfaces {
         R0R1 {
@@ -69,9 +69,9 @@ r1 {
     system {
        
         make        "juniper";
-        name "e10-37";
+        #name "e10-37";
         #name "vsrx2-esx-cn17";
-        #model       (or "srx220h" "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #model       (or "srx220h" "srx300" "srx320" "srx340" "srx345" "srx550m" );
     }
     interfaces {
         R1R0 {

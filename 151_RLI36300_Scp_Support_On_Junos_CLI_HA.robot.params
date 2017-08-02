@@ -20,8 +20,8 @@ uv-mask        "24";
 r0 {
     system {
         make        "juniper";
-        name         "beifang";
-        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #name         "beifang";
+        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" );
     }
     interfaces {
         R0R1 {
@@ -37,8 +37,8 @@ r1 {
     x-jsr-cc-primary 1;
     system {
         make        "juniper";
-        name         "e09-22";
-        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" "srx1500");
+        #name         "e09-22";
+        #model       (or  "srx300" "srx320" "srx340" "srx345" "srx550m" );
     }
     interfaces {
         R1R0_1 {
