@@ -69,7 +69,7 @@ SCP_TC_2
     ...     Tc5.1-3  in default routing instance,scp file from local to remote with source-address
     ...     Tc5.1-4  in default routing instance,scp file from remote to local with source-address
 
-    [Tags]  scp with source address
+    [Tags]  scp_with_source_address
 
 
     Scp file from local to remote with source address  server_ip=${tv['uv-r1_r0-ip-lo']}  source_addr=${tv['uv-r0_r1-ip-lo']}
