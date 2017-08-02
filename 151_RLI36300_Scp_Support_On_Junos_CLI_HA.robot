@@ -36,7 +36,7 @@ SCP_TC_1
     ...     Tc5.1-12  scp on HA
     ...
 
-    [Tags]  SCP HA
+    [Tags]  SCP_HA
 
     Scp file from local to remote   server_ip=${tv['uv-r0_r1-ip']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
