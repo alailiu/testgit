@@ -5,8 +5,8 @@ Documentation                       RLI36300 scp support on Junos CLI with src-a
 ...             RLI                : 36300
 ...             MIN RELEASE        : 15.1
 ...             MAIN FEATURE       : scp CLI
-...             Platform Supported : SRX300, SRX320, SRX340, SRX345
-...             CUSTOMER           : Moto
+...             Platform Supported : SRX300, SRX320, SRX340, SRX345, SRX550m
+...             CUSTOMER           : Swift
 
 
 *** Settings ***
