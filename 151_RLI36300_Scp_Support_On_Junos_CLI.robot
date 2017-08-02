@@ -114,8 +114,8 @@ SCP_TC_4
 
 SCP_TC_5
     [Documentation]
-    ...     Tc5.1-5  in default routing instance,scp file from local to remote in routing instance
-    ...     Tc5.1-6  in default routing instance,scp file from remote to local in routing instance
+    ...     Tc5.1-5  in routing instance,scp file from local to remote in routing instance
+    ...     Tc5.1-6  in routing instance,scp file from remote to local in routing instance
     [Tags]  scp with in routing instance
 
 
@@ -129,8 +129,8 @@ SCP_TC_5
 
 SCP_TC_6
     [Documentation]
-    ...     Tc5.1-7  in default routing instance,scp file from local to remote with source-address in routing instance
-    ...     Tc5.1-8  in default routing instance,scp file from remote to local with source-address in routing instance
+    ...     Tc5.1-7  in routing instance,scp file from local to remote with source-address in routing instance
+    ...     Tc5.1-8  in routing instance,scp file from remote to local with source-address in routing instance
     [Tags]  scp with in routing instance
 
 
@@ -145,8 +145,8 @@ SCP_TC_6
 
 SCP_TC_7
     [Documentation]
-    ...     Tc5.1-5  in default routing instance,scp file from local to remote in routing instance for ipv6
-    ...     Tc5.1-6  in default routing instance,scp file from remote to local in routing instance for ipv6
+    ...     Tc5.1-5  in routing instance,scp file from local to remote in routing instance for ipv6
+    ...     Tc5.1-6  in routing instance,scp file from remote to local in routing instance for ipv6
     [Tags]  scp with in routing instance
 
 
@@ -163,8 +163,8 @@ SCP_TC_7
 
 SCP_TC_8
     [Documentation]
-    ...     Tc5.1-7  in default routing instance,scp file from local to remote with source-address in routing instance for ipv6
-    ...     Tc5.1-8  in default routing instance,scp file from remote to local with source-address in routing instance for ipv6
+    ...     Tc5.1-7  in routing instance,scp file from local to remote with source-address in routing instance for ipv6
+    ...     Tc5.1-8  in routing instance,scp file from remote to local with source-address in routing instance for ipv6
     [Tags]  scp with in routing instance
 
 
