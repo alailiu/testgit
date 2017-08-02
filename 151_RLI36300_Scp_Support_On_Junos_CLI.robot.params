@@ -45,17 +45,6 @@ uv-r1_r0-nm6-lo2    "4100::/64";
 
 uv-mask        "24";
 uv-mask6        "64";
-uv-connection-name   "c1";
-uv-session-name      "t1";
-uv-probes-count       "2000";
-uv-port-range     "1to65535";
-uv-port           "234";
-uv-connection-cnt   "40";
-uv-session-cnt      "15";
-uv-session-percon    "5";
-uv-inact-timeout     "2";
-uv-routing-instance   "twamp";
-uv-rtt-range          "-50000to50000";
 
 
 r0 {
