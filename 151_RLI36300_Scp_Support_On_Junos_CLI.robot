@@ -101,7 +101,7 @@ SCP_TC_4
     ...     Tc5.1-9  in default routing instance,scp file from local to remote with source-address for ipv6
     ...     Tc5.1-9  in default routing instance,scp file from remote to local with source-address for ipv6
 
-    [Tags]  scp with source address
+    [Tags]  scp_with_source_address
 
     #sleep   50000000s
     Scp file from local to remote with source address  server_ip=[${tv['uv-r1_r0-ip6-lo']}]  source_addr=${tv['uv-r0_r1-ip6-lo']}
@@ -116,7 +116,7 @@ SCP_TC_5
     [Documentation]
     ...     Tc5.1-5  in routing instance,scp file from local to remote in routing instance
     ...     Tc5.1-6  in routing instance,scp file from remote to local in routing instance
-    [Tags]  scp with in routing instance
+    [Tags]  scp_with_routing_instance
 
 
     Scp file from local to remote in routing instance   server_ip=${tv['uv-r1_r0-ip2']}
@@ -131,7 +131,7 @@ SCP_TC_6
     [Documentation]
     ...     Tc5.1-7  in routing instance,scp file from local to remote with source-address in routing instance
     ...     Tc5.1-8  in routing instance,scp file from remote to local with source-address in routing instance
-    [Tags]  scp with in routing instance
+    [Tags]  scp_with_source_in_routing_instance
 
 
 
@@ -147,7 +147,7 @@ SCP_TC_7
     [Documentation]
     ...     Tc5.1-5  in routing instance,scp file from local to remote in routing instance for ipv6
     ...     Tc5.1-6  in routing instance,scp file from remote to local in routing instance for ipv6
-    [Tags]  scp with in routing instance
+    [Tags]  scp_in_routing_instance
 
 
 
@@ -165,7 +165,7 @@ SCP_TC_8
     [Documentation]
     ...     Tc5.1-7  in routing instance,scp file from local to remote with source-address in routing instance for ipv6
     ...     Tc5.1-8  in routing instance,scp file from remote to local with source-address in routing instance for ipv6
-    [Tags]  scp with in routing instance
+    [Tags]  scp_with_source_in_routing_instance
 
 
 
@@ -182,14 +182,14 @@ SCP_TC_8
 SCP_TC_9
     [Documentation]
     ...     Tc5.1-10  scp authenticity test
-    [Tags]  scp command interactive test
+    [Tags]  scp_command_interactive_test
     Scp interactive test
 
 
 SCP_TC_10
     [Documentation]
     ...     Tc5.1-11  scp with recursive option
-    [Tags]  scp with recursive option
+    [Tags]  scp_with_recursive_option
 
     Scp folder from local to remote   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${server}  filename=folder/testfilelocal  size=${filelocalsize}
@@ -203,7 +203,7 @@ SCP_TC_10
 SCP_TC_11
     [Documentation]
     ...     Tc5.1-12  multiple scp test
-    [Tags]  multiple scp test
+    [Tags]  multiple_scp_test
 
     Scp file from local to remote   server_ip=${tv['uv-r1_r0-ip']}
     Check copied file size   device=${server}  filename=testfilelocal  size=${filelocalsize}
